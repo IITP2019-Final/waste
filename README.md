@@ -12,6 +12,8 @@
 - linux: source venv/bin/activate
 - window: call venv/Scripts/activate
 6. 패키지 환경을 맞춤(설치) 
-pip install -r requirements.txt
-7. 실행
-python manage.py runserver
+- pip install -r requirements.txt
+7. config/setting.py secret_key 설정
+- with open('경로/secret_key.txt') as f:
+8. 실행
+- python manage.py runserver
