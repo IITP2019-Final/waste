@@ -17,3 +17,7 @@
 - with open('경로/secret_key.txt') as f:
 8. 실행
 - python manage.py runserver
+9. config/setting.py DB 설정
+- 'OPTIONS': {
+            'read_default_file': '경로/my_waste.cnf',
+        },
