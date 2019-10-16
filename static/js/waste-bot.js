@@ -85,10 +85,10 @@ $.ajaxSetup({
                 '      </thead>\n' +
                 '      <tbody>\n' +
                 '        <tr>\n' +
-                '          <td>' + data.result + '</td><td>Lorem</td><td>Ipsum</td><td>' + data.result + '</td>\n' +
+                '          <td>' + data.sigungu[0] + '</td><td>Lorem</td><td>Ipsum</td><td>' + data.sigungu[9] + '</td>\n' +
                 '        </tr>\n' +
                 '        <tr>\n' +
-                '          <td>Lorem</td><td>Lorem</td><td>' + data.result + '</td><td>Dolor</td>\n' +
+                '          <td>Lorem</td><td>Lorem</td><td>' + data.sigungu[15] + '</td><td>Dolor</td>\n' +
                 '        </tr>\n' +
                 '      </tbody>\n' +
                 '    </table>' +
