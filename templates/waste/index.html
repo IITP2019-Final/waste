@@ -102,7 +102,7 @@
         <div class="col">
         </div>
         <div class="col">
-          <div class="botui-app-container" id="hello-world">
+          <div class="botui-app-container" id="waste-bot">
             <bot-ui></bot-ui>
           </div>
         </div>
@@ -301,21 +301,7 @@
   <!-- BotUI Javascript File -->
   <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
-
-  <script>
-   var botui = new BotUI('hello-world');
-
-   botui.message.add({
-     content: 'Hello World from bot!'
-   }).then(function () { // wait till previous message has been shown.
-
-     botui.message.add({
-       delay: 1000,
-       human: true,
-       content: 'Hello World from human!'
-     });
-   });
-  </script>
+  <script src="{% static 'js/waste-bot.js' %}"></script>
 
 </body>
 </html>
