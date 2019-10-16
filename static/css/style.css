@@ -475,7 +475,7 @@ h6 {
 --------------------------------*/
 
 .section-bg {
-  background: #ecf5ff;
+  background: rgba(255, 255, 255, 0);
 }
 
 /* About Us Section
@@ -1410,4 +1410,23 @@ h6 {
   #intro {
     padding: 100px 0 20px 0;
   }
+}
+
+.botui-actions-buttons-button {
+    border: 0;
+    color: #fff;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 7px 15px;
+    border-radius: 4px;
+    font-family: "Open Sans",sans-serif;
+    background: #75c3e8d6;
+    box-shadow: 2px 3px 4px 0 rgba(0,0,0,.13);
+}
+
+.botui-message-content.human {
+    color: #f7f8f8;
+    background-color: #afe4e4;
 }
