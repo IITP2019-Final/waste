@@ -10,8 +10,14 @@ def post(request):
 
         print(request.body)
 
-        q = City.objects.all()
-        data = {'result': '서버입니다.' + q.sido[10]}
+        data = []
+
+        for c in City.objects.all():
+            print(c.sigungu)
+            data.append(c.sigungu)
+
+        data = {'sigungu': data}
+
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
