@@ -1430,3 +1430,12 @@ h6 {
     color: #f7f8f8;
     background-color: #afe4e4;
 }
+
+.image-upload {
+  width: 350px;
+  height: 500px;
+  margin: 0 auto;
+  line-height: 1;
+  box-sizing: border-box;
+  display: block;
+}

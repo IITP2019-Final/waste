@@ -76,20 +76,24 @@ $.ajaxSetup({
             delay: 2000,
             loading: true,
             type: 'html',
-            content: '폐기물 <u>처리방법</u> 입니다.<br><br>' //+ res.value
+            content: '폐기물 <u>처리비용</u> 입니다.<br><br>' //+ res.value
             + '<table>\n' +
                 '      <thead>\n' +
                 '        <tr>\n' +
-                '          <th>Lorem</th><th>Lorem</th><th>Ipsum</th><th>Dolor</th>\n' +
+                '          <th>품목</th><th>규격</th><th>부과금액(단위:원)</th>\n' +
                 '        </tr>\n' +
                 '      </thead>\n' +
                 '      <tbody>\n' +
                 '        <tr>\n' +
-                '          <td>' + data.sigungu[0] + '</td><td>Lorem</td><td>Ipsum</td><td>' + data.sigungu[9] + '</td>\n' +
+                '          <td>침대</td><td>2인용 세트</td><td>16,000</td>\n' +
                 '        </tr>\n' +
                 '        <tr>\n' +
-                '          <td>Lorem</td><td>Lorem</td><td>' + data.sigungu[15] + '</td><td>Dolor</td>\n' +
+                '          <td>침대</td><td>침대 헤드 2인용</td><td>3,000</td>\n' +
                 '        </tr>\n' +
+                '        <tr>\n' +
+                '          <td>침대</td><td>2인용 매트리스</td><td>8,000</td>\n' +
+                '        </tr>\n' +
+
                 '      </tbody>\n' +
                 '    </table>' +
                 '<style>\n' +
@@ -104,7 +108,7 @@ $.ajaxSetup({
                 '  }\n' +
                 '</style><br>'
 
-            + '궁금한 사항이 더 있으신가요?'
+            + '*대형폐가전(원형보전) 또는 재활용 가능 시 : 무상수거 가능합니다.<br>궁금한 사항이 더 있으신가요?'
           });
       });
 
