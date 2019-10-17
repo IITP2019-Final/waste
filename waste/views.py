@@ -14,11 +14,15 @@ def post(request):
         with open("data/unique_intent.pickle", "rb") as fr:
             unique_intent = pickle.load(fr)
 
-        text = "방법"
-        pred = predictions(text)
-        get_final_output(pred, unique_intent)
+        data = request.POST
+        print('type: ', type(data))
+        print('post text:', data)
 
-        print(request.body)
+        # QueryDic
+        print(data.get('text[value]'))
+
+        pred = predictions(data.get('text[value]'))
+        get_final_output(pred, unique_intent)
 
         data = []
 

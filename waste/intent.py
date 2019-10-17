@@ -7,8 +7,10 @@ from konlpy.tag import Okt
 import re
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
+from tensorflow.python.keras.backend import set_session
 from keras.models import load_model
 
+sess = tf.Session()
 graph = tf.get_default_graph()
 
 
@@ -68,7 +70,7 @@ def padding_doc(encoded_doc, max_length):
 
 padded_doc = padding_doc(encoded_doc, max_length)
 
-
+set_session(sess)
 model = load_model("data/model.h5")
 
 
@@ -77,6 +79,9 @@ def predictions(text):
     # test_word = word_tokenize(text)
     # test_word = [w.lower() for w in test_word]
     test_word = okt.morphs(text)
+
+    print(test_word)
+
     test_ls = word_tokenizer.texts_to_sequences(test_word)
 
     # Check for unknown words
@@ -88,24 +93,23 @@ def predictions(text):
 
     x = padding_doc(test_ls, max_length)
 
-
-
     with graph.as_default():
+        set_session(sess)
         pred = model.predict_proba(x)
 
     return pred
 
 
 def get_final_output(pred, classes):
-    predictions = pred[0]
+    prediction = pred[0]
 
     classes = np.array(classes)
 
-    ids = np.argsort(-predictions)
+    ids = np.argsort(-prediction)
 
     classes = classes[ids]
 
-    predictions = -np.sort(-predictions)
+    prediction = -np.sort(-prediction)
 
     for i in range(pred.shape[1]):
-        print("%s has confidence = %s" % (classes[i], (predictions[i])))
+        print("%s has confidence = %s" % (classes[i], (prediction[i])))

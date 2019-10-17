@@ -68,7 +68,7 @@ $.ajaxSetup({
     }
 });
 
-      $.post('/chatbots', {text: res}).done(function(data){
+      $.post('/chatbots', {'text': res}).done(function(data){
         console.log(data)
 
         botui.message
