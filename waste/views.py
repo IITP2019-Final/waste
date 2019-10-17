@@ -1,12 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import City
+from .models import City, Business, Waste
 import json
 import pickle
 from waste.intent import predictions, get_final_output
 
 
-def post(request):
+def post1(request):
     if request.method == "POST":
         # get_value = request.body
 
@@ -31,6 +31,40 @@ def post(request):
             data.append(c.sigungu)
 
         data = {'sigungu': data}
+
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def post(request):
+    if request.method == "POST":
+        # get_value = request.body
+
+        print(request.body)
+
+        data = []
+
+        for c in Waste.objects.filter(item__contains='침대', city_cityid=1):
+            print(c.item)
+            data.append(c.item)
+
+        data = {'item': data}
+
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def business(request):
+    if request.method == "POST":
+        # get_value = request.body
+
+        print(request.body)
+
+        data = []
+
+        for c in Business.objects.filter(city_cityid=(10, 26), type__icontains='재활용'):
+            print(c.name)
+            data.append(c.name)
+
+        data = {'name': data}
 
         return HttpResponse(json.dumps(data), content_type="application/json")
 
