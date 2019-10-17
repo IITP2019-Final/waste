@@ -2,13 +2,27 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import City
 import json
+import pickle
+from waste.intent import predictions, get_final_output
 
 
 def post(request):
     if request.method == "POST":
         # get_value = request.body
 
-        print(request.body)
+        # Load pickle
+        with open("data/unique_intent.pickle", "rb") as fr:
+            unique_intent = pickle.load(fr)
+
+        data = request.POST
+        print('type: ', type(data))
+        print('post text:', data)
+
+        # QueryDic
+        print(data.get('text[value]'))
+
+        pred = predictions(data.get('text[value]'))
+        get_final_output(pred, unique_intent)
 
         data = []
 
