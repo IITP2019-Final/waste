@@ -121,11 +121,21 @@
     <section id="team">
       <div class="container">
         <div class="section-header">
-          <h3>Team</h3>
+          <h3>이미지 검색</h3>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
         </div>
 
+           <form action="" method="">
+                <div style="margin-bottom: 10px;" class="custom-file">
+                    <input  previewnum="foo1" type="file" class="custom-file-input" id="imgInp1" style="width: 300px;">
+                    <label class="custom-file-label" for="imgInp1" style="width: 326px;">Choose file</label>
+                </div>
+                <img style="width: 350px; height: 350px;" id="foo1"src="#" />
+            </form>
+
         <div class="row">
+
+
 
           <div class="col-lg-3 col-md-6 wow fadeInUp">
             <div class="member">
@@ -304,6 +314,34 @@
   <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
   <script src="{% static 'js/waste-bot.js' %}"></script>
+
+ <!-- file upload & preview -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function readURL(input, previewnum) {
+        previewnum = "#"+previewnum;
+          var reader = new FileReader();
+          reader.onload = function(e) {
+              $(previewnum).attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+    }
+
+  $(".custom-file-input").change(function() {
+       var previewnum = $(this).attr('previewnum');
+
+      readURL(this, previewnum)
+  });
+</script>
+
+<script>
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 
 </body>
 </html>
