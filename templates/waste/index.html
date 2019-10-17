@@ -124,15 +124,16 @@
           <h3>이미지 검색</h3>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
         </div>
-
+       <div class="image-upload">
+           <img style="width: 350px; height: 350px; margin-bottom:30px;" id="foo1" src="{% static 'img/add-image.png' %}" />
            <form action="" method="">
                 <div style="margin-bottom: 10px;" class="custom-file">
                     <input  previewnum="foo1" type="file" class="custom-file-input" id="imgInp1" style="width: 300px;">
-                    <label class="custom-file-label" for="imgInp1" style="width: 326px;">Choose file</label>
+                    <label class="custom-file-label" for="imgInp1" style="width: 326px;">폐기물 사진을 올려주세요.</label>
                 </div>
-                <img style="width: 350px; height: 350px;" id="foo1"src="#" />
-            </form>
 
+            </form>
+       </div>
         <div class="row">
 
 
@@ -315,7 +316,7 @@
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
   <script src="{% static 'js/waste-bot.js' %}"></script>
 
- <!-- file upload & preview -->
+ <!-- image upload & preview -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
