@@ -77,7 +77,7 @@ $.ajaxSetup({
             loading: true,
             type: 'html',
             content: '폐기물 <u>처리비용</u> 입니다.<br><br>' //+ res.value
-            + '<table>\n' +
+/*            + '<table>\n' +
                 '      <thead>\n' +
                 '        <tr>\n' +
                 '          <th>품목</th><th>규격</th><th>부과금액(단위:원)</th>\n' +
@@ -106,7 +106,11 @@ $.ajaxSetup({
                 '    border: 1px solid #444444;\n' +
                 '    padding: 10px;\n' +
                 '  }\n' +
-                '</style><br>'
+                '</style><br>'*/
+
+              + '<div class="container">\n' +
+                '   <h2> {{ data.price }} <h2>' +
+                '</div>'
 
             + '*대형폐가전(원형보전) 또는 재활용 가능 시 : 무상수거 가능합니다.<br>궁금한 사항이 더 있으신가요?'
           });

@@ -34,10 +34,17 @@ def post1(request):
 
         return HttpResponse(json.dumps(data), content_type="application/json")
 
+def get(self, request):
+    form = HomeForm()
+    posts= Post.objects.all()
 
-def post(request):
-    if request.method == "POST":
-        # get_value = request.body
+    args= {'form':form,}
+    return render(request, self.template_name, args)
+
+def post(self, request):
+    form = HomeForm(request.POST)
+    if form.is_valid():
+
 
         print(request.body)
 
@@ -48,7 +55,7 @@ def post(request):
             data.append(temp)
 
         data = {'data': data}
-        print(data)
+
 
         return HttpResponse(json.dumps(data), content_type="application/json")
 
