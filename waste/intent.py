@@ -111,5 +111,14 @@ def get_final_output(pred, classes):
 
     prediction = -np.sort(-prediction)
 
+    result = {}
+    temp = 0
+
     for i in range(pred.shape[1]):
+        if prediction[i] > temp:
+            result['result'] = classes[i]
+            temp = prediction[i]
+
         print("%s has confidence = %s" % (classes[i], (prediction[i])))
+
+    return result
