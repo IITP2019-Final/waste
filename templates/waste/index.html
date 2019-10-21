@@ -32,6 +32,7 @@
 
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/user_style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
     Theme Name: NewBiz
@@ -58,6 +59,8 @@
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="#intro">Home</a></li>
+          <li><a href="#chatbot">Chatbot</a></li>
+          <li><a href="#image">Image</a></li>
           <li><a href="#team">Team</a></li>
         </ul>
       </nav><!-- .main-nav -->
@@ -70,19 +73,16 @@
   ============================-->
   <section id="intro" class="clearfix">
     <div class="container">
-
       <div class="intro-img">
         <img src="{% static 'img/intro-img.svg' %}" alt="" class="img-fluid">
       </div>
-
       <div class="intro-info">
         <h2>We provide<br><span>solutions</span><br>for your business!</h2>
         <div>
           <a href="#about" class="btn-get-started scrollto">Get Started</a>
-          <a href="#services" class="btn-services scrollto">Our Services</a>
+          <a href="#chatbot" class="btn-services scrollto">Our Services</a>
         </div>
       </div>
-
     </div>
   </section><!-- #intro -->
 
@@ -91,122 +91,132 @@
   <!--==========================
     챗봇 QnA
   ============================-->
-  <section id="services" class="section-bg">
+  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
+  <section id="chatbot">
     <div class="container">
-
       <header class="section-header">
         <h3>챗봇 QnA</h3>
         <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
       </header>
-
-          <div class="botui-app-container" id="waste-bot">
-            <bot-ui></bot-ui>
-          </div>
-
+      <div class="botui-app-container" id="waste-bot">
+        <bot-ui></bot-ui>
+      </div>
     </div>
-  </section><!-- #services -->
+  </section><!-- #chatbot -->
 
-    <!--==========================
-      이미지 검색
-    ============================-->
-    <section id="team">
-      <div class="container">
-        <div class="section-header">
-          <h3>이미지 검색</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+  <!--==========================
+    이미지 검색
+  ============================-->
+  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
+  <section id="image" class="section-bg">
+    <div class="container">
+      <header class="section-header">
+        <h3>이미지 분석</h3>
+        <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+      </header>
+      <div class="image-upload">
+        {% block content %}
+        <form id='imageUploadForm' class="dropzone needsclick dz-clickable" action="/images" method="post", enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="dz-message needsclick">
+            Drop files here or click to upload.
+          </div>
+        </form>
+        {% endblock %}
+      </div>
+    </div>
+  </section><!-- #image-->
+
+  <!--==========================
+    Team Section
+  ============================-->
+  <section id="team">
+    <div class="container">
+      <div class="section-header">
+        <h3>Team</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6 wow fadeInUp">
+          <div class="member">
+            <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-       <div class="image-upload">
-           <img style="width: 350px; height: 350px; margin-bottom:30px;" id="foo1" src="{% static 'img/add-image.png' %}" />
-           <form action="" method="">
-                <div style="margin-bottom: 10px;" class="custom-file">
-                    <input  previewnum="foo1" type="file" class="custom-file-input" id="imgInp1" style="width: 300px;">
-                    <label class="custom-file-label" for="imgInp1" style="width: 326px;">폐기물 사진을 올려주세요.</label>
-                </div>
 
-            </form>
-       </div>
-        <div class="row">
-
-
-
-          <div class="col-lg-3 col-md-6 wow fadeInUp">
-            <div class="member">
-              <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="member">
+            <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="member">
-              <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="member">
+            <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="member">
-              <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="member">
+            <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="member">
-              <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </div>
-    </section><!-- #team -->
 
-  </main>
+    </div>
+  </section><!-- #team -->
+
+</main>
 
   <!--==========================
     Footer
@@ -307,9 +317,24 @@
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
   <script src="{% static 'js/waste-bot.js' %}"></script>
 
+  <!-- Dropzone Javascript File -->
+  <script src="{% static 'js/dropzone.js' %}"></script>
+
+  <script type="text/javascript">
+    Dropzone.options.imageUploadForm = {
+      paramName: "file",
+      maxFilesize: 5,
+      maxFiles: 1,
+      success: function(file, response) {
+        console.log(file)
+        console.log(response)
+      }
+    }
+  </script>
+
  <!-- image upload & preview -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
     function readURL(input, previewnum) {
@@ -333,7 +358,7 @@ $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
-</script>
+</script> -->
 
 </body>
 </html>

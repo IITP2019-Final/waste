@@ -4,6 +4,8 @@ from .models import City, Business, Waste
 import json
 import pickle
 from waste.intent import predictions, get_final_output
+from PIL import Image
+from .forms import ImageUploadFileForm
 
 
 def post(request):
@@ -39,6 +41,23 @@ def post(request):
         print(data)
 
         return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def upload_images(request):
+    if request.method == 'POST':
+        form = ImageUploadFileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            file = request.FILES['file']
+            print(file.name, file.content_type, file.size)
+
+            data = {'file_name': file.name, 'file_content_type': file.content_type, 'file_size': file.size}
+
+            return HttpResponse(json.dumps(data), content_type="application/json")
+        else :
+            data = {'file': 'is_not_valid'}
+
+            return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 def business(request):

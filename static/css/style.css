@@ -475,7 +475,7 @@ h6 {
 --------------------------------*/
 
 .section-bg {
-  background: #b3d7ff38;
+  background: #ecf5ff;
 }
 
 /* About Us Section
@@ -862,6 +862,12 @@ h6 {
   opacity: 1;
 }
 
+.dropzone {
+  border: 2px dashed #0087f7;
+  border-radius: 5px;
+  background: white
+}
+
 /* Testimonials Section
 --------------------------------*/
 
@@ -918,6 +924,14 @@ h6 {
 
 #testimonials .owl-dot.active {
   background-color: #007bff;
+}
+
+/* Chatbot Section
+--------------------------------*/
+section #chatbot {
+  background: #fff;
+  padding: 60px 0;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Team Section
@@ -1410,81 +1424,4 @@ h6 {
   #intro {
     padding: 100px 0 20px 0;
   }
-}
-
-/*---챗봇---*/
-.botui-container{
-  font-family: 'Nanum Gothic', sans-serif;
-}
-
-.botui-actions-buttons-button {
-    border: 0;
-    color: #fff;
-    line-height: 1;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 7px 15px;
-    border-radius: 4px;
-    font-family: "Open Sans",sans-serif;
-    background: #75c3e8d6;
-    box-shadow: 2px 3px 4px 0 rgba(0,0,0,.13);
-}
-
-.botui-message-content.human {
-    color: #f7f8f8;
-    background-color: #afe4e4;
-}
-
-.botui-app-container {
-  width: 700px;
-}
-
-.table {
-  width: 100%;
-  border: 1px solid #444444;
-  border-collapse: collapse;
-}
-
-th {
-  border: 1px solid #c2c2c2;
-  padding: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  background-color: rgba(172, 232, 238, 0.18);
-}
-
-td {
-  border: 1px solid #c2c2c2;
-  padding: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  background-color: #f7f8f8;
-}
-
-.answer-table {
-  margin-top: 7px;
-  margin-bottom: 7px;
-  margin-left: 2px;
-  margin-right: 2px;
-  line-height: initial;
-}
-
-.answer-table2 {
-  margin-top: 7px;
-  margin-bottom: 7px;
-  margin-left: 2px;
-  margin-right: 2px;
-  line-height: 19px;
-}
-
-
-/*---이미지 검색---*/
-.image-upload {
-  width: 350px;
-  height: 500px;
-  margin: 0 auto;
-  line-height: 1;
-  box-sizing: border-box;
-  display: block;
 }
