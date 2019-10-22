@@ -33,12 +33,33 @@ def post(request):
 
         if data['result'] == '비용':
             data['result'] = 0
+
+            data['data'] = []
+            # ORM 폐기물:카테고리, 물품, 규격, 가격
+            for waste in Waste.objects.filter(item__contains='침대', city_cityid=1):
+                temp = [waste.category, waste.item, waste.size, waste.price]
+                data['data'].append(temp)
+
         elif data['result'] == '업체':
             data['result'] = 1
+
+            data['business'] = []
+
+            #ORM 업체:
+            for c in Business.objects.filter(city_cityid=(10, 26), type__icontains='재활용'):
+                temp = [business.name, business.type, business.dong, business.phone]
+                data['business'].append(temp)
+
         elif data['result'] == '방법':
             data['result'] = 2
 
-        print(data)
+
+
+
+
+
+
+
 
         return HttpResponse(json.dumps(data), content_type="application/json")
 
