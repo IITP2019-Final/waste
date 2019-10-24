@@ -18,14 +18,14 @@
   <link href="https://fonts.googleapis.com/css?family=Hi+Melody&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'newbizlib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
 
   <!-- BotUI CSS Files -->
   <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
@@ -33,6 +33,7 @@
 
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/user_style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
     Theme Name: NewBiz
@@ -59,8 +60,9 @@
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="#intro">Home</a></li>
-          <li><a href="#services">챗봇 QnA</a></li>
-          <li><a href="#team">이미지 검색</a></li>
+          <li><a href="#chatbot">Chatbot</a></li>
+          <li><a href="#image">Image</a></li>
+          <li><a href="#team">Team</a></li>
         </ul>
       </nav><!-- .main-nav -->
 
@@ -72,19 +74,16 @@
   ============================-->
   <section id="intro" class="clearfix">
     <div class="container">
-
       <div class="intro-img">
         <img src="{% static 'img/intro-img.svg' %}" alt="" class="img-fluid">
       </div>
-
       <div class="intro-info">
         <h2>We provide<br><span>solutions</span><br>for your business!</h2>
         <div>
-          <a href="#services" class="btn-get-started scrollto">챗봇에 물어보기</a>
-          <a href="#team" class="btn-services scrollto">이미지 검색</a>
+          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+          <a href="#chatbot" class="btn-services scrollto">Our Services</a>
         </div>
       </div>
-
     </div>
   </section><!-- #intro -->
 
@@ -93,19 +92,39 @@
   <!--==========================
     챗봇 QnA
   ============================-->
-  <section id="services" class="section-bg">
+  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
+  <section id="chatbot">
     <div class="container">
-
       <header class="section-header">
         <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">챗봇 QnA</h3>
         <p >Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
       </header>
+      <div class="botui-app-container" id="waste-bot" style="width: 1000px">
+        <bot-ui></bot-ui>
+      </div>
+    </div>
+  </section><!-- #chatbot -->
 
-          <div class="botui-app-container" id="waste-bot" style="border: 1px solid #32bbcd54;">
-              <div style="height:30px; width:698px; background-color:#32bbcd54;"></div>
-            <bot-ui></bot-ui>
+  <!--==========================
+    이미지 검색
+  ============================-->
+  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
+  <section id="image" class="section-bg">
+    <div class="container">
+      <header class="section-header">
+        <h3>이미지 분석</h3>
+        <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+      </header>
+      <div class="image-upload">
+        {% block content %}
+        <form id='imageUploadForm' class="dropzone needsclick dz-clickable" action="/images" method="post", enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="dz-message needsclick">
+            Drop files here or click to upload.
           </div>
-
+        </form>
+        {% endblock %}
+      </div>
     </div>
   </section><!-- #services -->
 
@@ -118,111 +137,102 @@
           <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">이미지 검색</h3>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
         </div>
+        
+        <a href="/result" class="btn-get-started scrollto">result</a>
 
-       <div class="image-upload">
- <!--           <form action="/file-upload" class="dropzone">
-              <div class="fallback">
-                <input name="file" type="file" multiple/>
-              </div>
-            </form>-->
+        <div class="clear"></div>
+  </section><!-- #image-->
 
-           <img style="width: 350px; height: 350px; margin-bottom:30px;" id="foo1" src="{% static 'img/add-image.png' %}" />
-
-           <form action="" method="">
-                <div style="margin-bottom: 10px;" class="custom-file">
-                    <input  previewnum="foo1" type="file" class="custom-file-input" id="imgInp1" style="width: 300px;">
-                    <label class="custom-file-label" for="imgInp1" style="width: 326px;">폐기물 사진을 올려주세요.</label>
-                </div>
-            </form>
-       </div>
-
-          <a href="/result" class="btn-get-started scrollto">result</a>
-
-          <div class="clear"></div>
-
-
+  <!--==========================
+    Team Section
+  ============================-->
+  <section id="team">
+    <div class="container">
+      <div class="section-header">
+        <h3>Team</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
 
 <script src="./path/to/dropzone.js"></script>
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 wow fadeInUp">
-            <div class="member">
-              <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 wow fadeInUp">
+          <div class="member">
+            <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="member">
-              <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="member">
+            <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="member">
-              <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="member">
+            <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="member">
-              <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="member">
+            <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
       </div>
-    </section><!-- #team -->
 
-  </main>
+    </div>
+  </section><!-- #team -->
+
+</main>
 
   <!--==========================
     Footer
@@ -301,17 +311,17 @@
   <!-- <div id="preloader"></div> -->
 
   <!-- JavaScript Libraries -->
-  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
-  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-  <script src="{% static 'lib/mobile-nav/mobile-nav.js' %}"></script>
-  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
-  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
-  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+  <script src="{% static 'newbizlib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'newbizlib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'newbizlib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'newbizlib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'newbizlib/mobile-nav/mobile-nav.js' %}"></script>
+  <script src="{% static 'newbizlib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'newbizlib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'newbizlib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'newbizlib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'newbizlib/isotope/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'newbizlib/lightbox/js/lightbox.min.js' %}"></script>
   <!-- Contact Form JavaScript File -->
   <script src="{% static 'contactform/contactform.js' %}"></script>
 
@@ -324,9 +334,25 @@
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
   <script src="{% static 'js/waste-bot.js' %}"></script>
 
+  <!-- Dropzone Javascript File -->
+  <script src="{% static 'js/dropzone.js' %}"></script>
+
+  <script type="text/javascript">
+    Dropzone.options.imageUploadForm = {
+      paramName: "file",
+      maxFilesize: 5,
+      maxFiles: 1,
+      acceptedFiles: "image/*"
+      success: function(file, response) {
+        console.log(file)
+        console.log(response)
+      }
+    }
+  </script>
+
  <!-- image upload & preview -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
     function readURL(input, previewnum) {
@@ -350,7 +376,7 @@ $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
-</script>
+</script> -->
 
 <!-- dropzone-->
   <link href="{% static 'css/dropzone.css' %}" rel="stylesheet">

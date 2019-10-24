@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     re_path(r'^chatbots', views.post, name='chatbots'),
-    path('home', views.index, name='index'),
-    path('result', views.imageResult, name='result')
+#     path('result', views.imageResult, name='result'),
+    re_path(r'^images', views.upload_images, name='images'),
+    path('', views.index, name='index')
 ]

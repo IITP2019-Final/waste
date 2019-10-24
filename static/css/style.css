@@ -475,7 +475,7 @@ h6 {
 --------------------------------*/
 
 .section-bg {
-  background: #b3d7ff38;
+  background: #ecf5ff;
 }
 
 /* About Us Section
@@ -862,6 +862,12 @@ h6 {
   opacity: 1;
 }
 
+.dropzone {
+  border: 2px dashed #0087f7;
+  border-radius: 5px;
+  background: white
+}
+
 /* Testimonials Section
 --------------------------------*/
 
@@ -918,6 +924,14 @@ h6 {
 
 #testimonials .owl-dot.active {
   background-color: #007bff;
+}
+
+/* Chatbot Section
+--------------------------------*/
+section #chatbot {
+  background: #fff;
+  padding: 60px 0;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Team Section

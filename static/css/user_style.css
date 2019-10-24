@@ -1,0 +1,27 @@
+.dropzone {
+  border: 2px dashed #0087f7;
+  border-radius: 5px;
+  background: white;
+  min-height: 150px;
+  padding: 54px 54px;
+}
+
+.dropzone.dz-clickable {
+  cursor: pointer;
+}
+
+.dropzone .dz-message{
+  font-weight: 400;
+  text-align: center;
+  margin: 2em 0;
+}
+
+#chatbot {
+  padding: 60px 0 40px 0;
+  box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+}
+
+#image {
+  padding: 60px 0;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+}
