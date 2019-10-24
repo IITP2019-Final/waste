@@ -99,6 +99,9 @@ def index(request):
     return render(request, 'waste/index.html')
 
 
+# def imageResult(request):
+#     return render(request, 'waste/image-result.html')
+
 def handle_uploaded_file(f):
     pathlib.Path('data/temp').mkdir(exist_ok=True)
 

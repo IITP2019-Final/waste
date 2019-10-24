@@ -15,6 +15,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Hi+Melody&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
   <link href="{% static 'newbizlib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -95,8 +96,8 @@
   <section id="chatbot">
     <div class="container">
       <header class="section-header">
-        <h3>챗봇 QnA</h3>
-        <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+        <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">챗봇 QnA</h3>
+        <p >Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
       </header>
       <div class="botui-app-container" id="waste-bot" style="width: 1000px">
         <bot-ui></bot-ui>
@@ -125,6 +126,21 @@
         {% endblock %}
       </div>
     </div>
+  </section><!-- #services -->
+
+    <!--==========================
+      이미지 검색
+    ============================-->
+    <section id="team">
+      <div class="container">
+        <div class="section-header">
+          <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">이미지 검색</h3>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+        </div>
+        
+        <a href="/result" class="btn-get-started scrollto">result</a>
+
+        <div class="clear"></div>
   </section><!-- #image-->
 
   <!--==========================
@@ -137,8 +153,8 @@
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
       </div>
 
+<script src="./path/to/dropzone.js"></script>
       <div class="row">
-
         <div class="col-lg-3 col-md-6 wow fadeInUp">
           <div class="member">
             <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
@@ -312,6 +328,7 @@
   <!-- Template Main Javascript File -->
   <script src="{% static 'js/main.js' %}"></script>
 
+
   <!-- BotUI Javascript File -->
   <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
@@ -360,6 +377,11 @@ $(".custom-file-input").on("change", function() {
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 </script> -->
+
+<!-- dropzone-->
+  <link href="{% static 'css/dropzone.css' %}" rel="stylesheet">
+  <script src="{% static 'js/dropzone.js' %}"></script>
+
 
 </body>
 </html>
