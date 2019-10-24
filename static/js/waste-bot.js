@@ -1,7 +1,7 @@
 var botui = new BotUI('waste-bot');
 
 botui.message
-  .bot('안녕하세요? 챗봇 철-E 입니다.')
+  .bot('안녕하세요? 챗봇 철이 입니다.')
   .then(function () {
     return botui.action.button({
       delay: 1000,

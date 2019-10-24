@@ -15,6 +15,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Hi+Melody&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
   <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -58,7 +59,8 @@
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="#intro">Home</a></li>
-          <li><a href="#team">Team</a></li>
+          <li><a href="#services">챗봇 QnA</a></li>
+          <li><a href="#team">이미지 검색</a></li>
         </ul>
       </nav><!-- .main-nav -->
 
@@ -78,8 +80,8 @@
       <div class="intro-info">
         <h2>We provide<br><span>solutions</span><br>for your business!</h2>
         <div>
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
-          <a href="#services" class="btn-services scrollto">Our Services</a>
+          <a href="#services" class="btn-get-started scrollto">챗봇에 물어보기</a>
+          <a href="#team" class="btn-services scrollto">이미지 검색</a>
         </div>
       </div>
 
@@ -95,11 +97,12 @@
     <div class="container">
 
       <header class="section-header">
-        <h3>챗봇 QnA</h3>
-        <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+        <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">챗봇 QnA</h3>
+        <p >Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
       </header>
 
-          <div class="botui-app-container" id="waste-bot">
+          <div class="botui-app-container" id="waste-bot" style="border: 1px solid #32bbcd54;">
+              <div style="height:30px; width:698px; background-color:#32bbcd54;"></div>
             <bot-ui></bot-ui>
           </div>
 
@@ -112,22 +115,35 @@
     <section id="team">
       <div class="container">
         <div class="section-header">
-          <h3>이미지 검색</h3>
+          <h3 style="font-family: 'Hi Melody', cursive; font-size: 50px;">이미지 검색</h3>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
         </div>
+
        <div class="image-upload">
+ <!--           <form action="/file-upload" class="dropzone">
+              <div class="fallback">
+                <input name="file" type="file" multiple/>
+              </div>
+            </form>-->
+
            <img style="width: 350px; height: 350px; margin-bottom:30px;" id="foo1" src="{% static 'img/add-image.png' %}" />
+
            <form action="" method="">
                 <div style="margin-bottom: 10px;" class="custom-file">
                     <input  previewnum="foo1" type="file" class="custom-file-input" id="imgInp1" style="width: 300px;">
                     <label class="custom-file-label" for="imgInp1" style="width: 326px;">폐기물 사진을 올려주세요.</label>
                 </div>
-
             </form>
        </div>
+
+          <a href="/result" class="btn-get-started scrollto">result</a>
+
+          <div class="clear"></div>
+
+
+
+<script src="./path/to/dropzone.js"></script>
         <div class="row">
-
-
 
           <div class="col-lg-3 col-md-6 wow fadeInUp">
             <div class="member">
@@ -302,6 +318,7 @@
   <!-- Template Main Javascript File -->
   <script src="{% static 'js/main.js' %}"></script>
 
+
   <!-- BotUI Javascript File -->
   <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
@@ -334,6 +351,11 @@ $(".custom-file-input").on("change", function() {
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 </script>
+
+<!-- dropzone-->
+  <link href="{% static 'css/dropzone.css' %}" rel="stylesheet">
+  <script src="{% static 'js/dropzone.js' %}"></script>
+
 
 </body>
 </html>

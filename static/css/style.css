@@ -1451,7 +1451,7 @@ th {
   padding: 10px;
   padding-top: 6px;
   padding-bottom: 6px;
-  background-color: rgba(172, 232, 238, 0.18);
+  background-color: rgba(238, 236, 236, 0.98);
 }
 
 td {
@@ -1487,4 +1487,13 @@ td {
   line-height: 1;
   box-sizing: border-box;
   display: block;
+}
+
+/*---이미지 결과--*/
+.results-table {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 2px;
+  margin-right: 2px;
+  line-height: initial;
 }

@@ -23,3 +23,6 @@ def post(request):
 
 def index(request):
     return render(request, 'waste/index.html')
+
+def imageResult(request):
+    return render(request, 'waste/image-result.html')
