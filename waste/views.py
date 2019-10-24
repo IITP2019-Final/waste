@@ -95,16 +95,13 @@ def business(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
-def index(request):
-    return render(request, 'waste/index.html')
-
-
-# def imageResult(request):
-#     return render(request, 'waste/image-result.html')
-
 def handle_uploaded_file(f):
     pathlib.Path('data/temp').mkdir(exist_ok=True)
 
     with open('data/temp/uploaded_image.jpg', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+
+def index(request):
+    return render(request, 'waste/index.html')
