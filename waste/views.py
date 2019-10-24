@@ -6,6 +6,7 @@ import pickle
 from waste.intent import predictions, get_final_output
 from .forms import ImageUploadFileForm
 from waste.image_checker import image_pred
+import pathlib
 
 
 def post(request):
@@ -99,6 +100,8 @@ def index(request):
 
 
 def handle_uploaded_file(f):
+    pathlib.Path('data/temp').mkdir(exist_ok=True)
+
     with open('data/temp/uploaded_image.jpg', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
