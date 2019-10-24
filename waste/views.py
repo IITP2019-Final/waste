@@ -53,14 +53,6 @@ def post(request):
         elif data['result'] == '방법':
             data['result'] = 2
 
-
-
-
-
-
-
-
-
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
@@ -71,6 +63,8 @@ def upload_images(request):
         if form.is_valid():
             file = request.FILES['file']
             print(file.name, file.content_type, file.size)
+
+            handle_uploaded_file(file)
 
             prediction = image_pred(file.read())
 
@@ -102,3 +96,9 @@ def business(request):
 
 def index(request):
     return render(request, 'waste/index.html')
+
+
+def handle_uploaded_file(f):
+    with open('data/temp/uploaded_image.jpg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

@@ -3,7 +3,7 @@ from keras.layers import Convolution2D, MaxPool2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 
 root_dir = "./waste_image/"
-categories = ['bed', 'chair', 'sofa', 'table']
+categories = ['bed', 'chair', 'computer', 'dresser', 'refrigerator', 'sofa', 'stove', 'table', 'tv', 'wordrobe']
 nb_classes = len(categories)
 image_size = 50
 
