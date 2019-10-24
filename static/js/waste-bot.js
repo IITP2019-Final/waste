@@ -67,64 +67,46 @@ var showReminderInput = function () {
           }
       });
 
+/*      $(document).ready( function (data) {
+      $('#myTable').DataTable();
+      } );*/
       $.post('/chatbots', {'text': res}).done(function(data){
         console.log(data)
 
-        // data['result'] = 0 (비용), 1(업체), 2(방법)
+
 
         if (data['result'] == 0) {
+        var ws = ''
+
+        $.each(data.data, function(index, value) {
+         ws +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td></tr>'
+        });
+        // data['result'] = 0 (비용), 1(업체), 2(방법)
           botui.message
             .bot({
               delay: 2000,
               loading: true,
               type: 'html',
               content: '<div class="answer-table">폐기물 <u>처리비용</u> 입니다.<br><br>' //+ res.value
-              + '<table>\n' +
-                  '      <thead>\n' +
-                  '        <tr>\n' +
-                  '          <th>품목</th><th>규격</th><th>부과금액(단위:원)</th>\n' +
-                  '        </tr>\n' +
-                  '      </thead>\n' +
-                  '      <tbody>\n' +
-                  '        <tr>\n' +
-                  '          <td>침대</td><td>2인용 세트</td><td>16,000</td>\n' +
-                  '        </tr>\n' +
-                  '        <tr>\n' +
-                  '          <td>침대</td><td>침대 헤드 2인용</td><td>3,000</td>\n' +
-                  '        </tr>\n' +
-                  '        <tr>\n' +
-                  '          <td>침대</td><td>2인용 매트리스</td><td>8,000</td>\n' +
-                  '        </tr>\n' +
-                  '      </tbody>\n' +
-                  '    </table></div>'
+              + '<table border=1><thead>' + '<tr>' + '<th>카테고리</th><th>품목</th><th>규격</th><th>부과금액(단위:원)</th>' + '</tr>' + '</thead>' + '<tbody>' + ws + '</tbody>' + '</table></div>'
               + '<div class="answer-table2">*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능합니다.<br>궁금한 사항이 더 있으신가요?</div>'
 
             });
+
+
         } else if (data['result'] == 1) {
+        var bs = ''
+
+        $.each(data.business, function(index, value) {
+        bs +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td><td>'+ value[4] + '</td></tr>'
+        });
           botui.message
             .bot({
               delay: 2000,
               loading: true,
               type: 'html',
               content: '<div class="answer-table">' + ' <u>수거업체</u> 입니다.<br><br>' //+ res.value
-              + '<table>\n' +
-                  '      <thead>\n' +
-                  '        <tr>\n' +
-                  '          <th>지역</th><th>업체명</th><th>소재지</th><th>전화번호</th>\n' +
-                  '        </tr>\n' +
-                  '      </thead>\n' +
-                  '      <tbody>\n' +
-                  '        <tr>\n' +
-                  '          <td>' + '</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>\n' +
-                  '        </tr>\n' +
-                  '        <tr>\n' +
-                  '          <td>' + '</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>\n' +
-                  '        </tr>\n' +
-                  '        <tr>\n' +
-                  '          <td>' + '</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>\n' +
-                  '        </tr>\n' +
-                  '      </tbody>\n' +
-                  '    </table></div>'
+              + '<table border=1><thead>' + '<tr>' + '<th>업체명</th><th>처리분야</th><th>세부지역</th><th>전화변호</th>' + '</tr>' + '</thead>' + '<tbody>' + bs + '</tbody>' + '</table></div>'
               + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div>'
             });
         } else if (data['result'] == 2) {
