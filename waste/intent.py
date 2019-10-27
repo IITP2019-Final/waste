@@ -116,7 +116,7 @@ def get_final_output(pred, classes):
 
     for i in range(pred.shape[1]):
         if prediction[i] > temp:
-            result['result'] = classes[i]
+            result['intent'] = classes[i]
             temp = prediction[i]
 
         print("%s has confidence = %s" % (classes[i], (prediction[i])))
