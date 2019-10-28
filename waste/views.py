@@ -24,7 +24,7 @@ def post_chatbot(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
-def upload_images(request):
+def post_image(request):
     if request.method == 'POST':
         form = ImageUploadFileForm(request.POST, request.FILES)
 
@@ -34,13 +34,9 @@ def upload_images(request):
 
             handle_uploaded_file(file)
 
-            prediction = image_pred(file.read())
+            item = image_pred(file.read())
 
-            data = {'file_name': file.name, 'file_content_type': file.content_type, 'file_size': file.size, 'result': prediction}
-
-            return HttpResponse(json.dumps(data), content_type="application/json")
-        else :
-            data = {'file': 'is_not_valid'}
+            data = {'item': item}
 
             return HttpResponse(json.dumps(data), content_type="application/json")
 
@@ -85,11 +81,12 @@ def create_final_answer_data(intent):
     return result
 
 
-def handle_uploaded_file(f):
-    pathlib.Path('data/temp').mkdir(exist_ok=True)
+def handle_uploaded_file(file):
+    UPLOAD_FILE_PATH = 'data/temp'
+    pathlib.Path(UPLOAD_FILE_PATH).mkdir(exist_ok=True)
 
-    with open('data/temp/uploaded_image.jpg', 'wb+') as destination:
-        for chunk in f.chunks():
+    with open(UPLOAD_FILE_PATH + '/uploaded_image.jpg', 'wb+') as destination:
+        for chunk in file.chunks():
             destination.write(chunk)
 
 

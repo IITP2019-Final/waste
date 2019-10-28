@@ -115,7 +115,7 @@
   <section id="image" class="section-bg">
     <div class="container">
       <header class="section-header">
-        <h3>이미지 분석</h3>
+        <h3>이미지 객체 인식</h3>
         <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
       </header>
       <div class="image-upload">
@@ -202,6 +202,7 @@
         </div>
         <div class="clear"></div>
       </div>
+    </div>
   </section><!-- #image -->
 
   <!--==========================
@@ -405,13 +406,7 @@
       acceptedFiles: "image/*",
       success: function(file, response) {
         console.log(file)
-        res=console.log(response)
         console.log(response)
-
-        $.each(data.data, function(index, value) {
-         ws +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td></tr>'
-        });
-
       }
     }
   </script>
