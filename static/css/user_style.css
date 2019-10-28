@@ -1,5 +1,56 @@
+body {
+  margin-top: 80px;
+}
+
+a {
+  color: #343a40;
+}
+
+a:focus {
+  color: #343a40;
+}
+
+.back-to-top {
+  background: #ffa08a;
+}
+
+#intro {
+/*  background: url("../img/intro-bg.png") center bottom no-repeat;*/
+}
+
+.btn-primary {
+  background-color: #ffae33;
+  border-color: #ffa518;
+}
+
+.form-control {
+  background-color: #fff;
+  border: 1px solid #bbc8d691;
+  cursor: pointer;
+  width:240px;
+}
+
+/*---이미지 검색---*/
+.image-upload {
+  width: 600px;
+  height: 300px;
+  margin: 0 auto;
+  line-height: 1;
+  box-sizing: border-box;
+  display: block;
+}
+
+/*---이미지 결과--*/
+.results-table {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 2px;
+  margin-right: 2px;
+  line-height: initial;
+}
+
 .dropzone {
-  border: 2px dashed #0087f7;
+  border: 10px dashed #bbc8d62b;
   border-radius: 5px;
   background: white;
   min-height: 150px;
@@ -19,6 +70,7 @@
 #chatbot {
   padding: 60px 0 40px 0;
   box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+  height: 910px;
 }
 
 #image {
