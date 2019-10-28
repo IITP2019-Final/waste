@@ -1,5 +1,26 @@
 var botui = new BotUI('waste-bot');
 
+/*botui.message.add({
+      photo: 'https://moin.im/face.svg',
+      loading: true
+    }).then(function (index) {
+      setTimeout(function () {
+        botui.message.update(index, {
+          content: 'Hello World from bot!',
+          loading: false
+        }).then(function () {
+          botui.message.add({
+            delay: 2000,
+            //loading: true,
+            photo: true,
+            photo: 'https://moin.im/face.svg',
+            content: 'Delayed Hello World'
+          });
+        });
+      }, 5000);
+    });
+*/
+
 botui.message
   .bot('안녕하세요? 챗봇 철이에요~ 폐기물처리에 대해 알려드려요!')
   .then(function () {

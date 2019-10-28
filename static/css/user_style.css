@@ -1,5 +1,5 @@
 .dropzone {
-  border: 2px dashed #0087f7;
+  border: 10px dashed #bbc8d62b;
   border-radius: 5px;
   background: white;
   min-height: 150px;
@@ -19,6 +19,7 @@
 #chatbot {
   padding: 60px 0 40px 0;
   box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+  height: 910px;
 }
 
 #image {
