@@ -139,24 +139,41 @@
             <img src="{% static 'img/add-image.png' %}" style="width:70px; margin-top:10px;"><div class="row" style="margin-top:40px; place-content:center;">Click here!</div>
               </div>
             </form>
+            {% endblock %}
           </div>
-          </div>
-          <div class="col" style="padding-left:0px;">
-            <div class="btn-group" style="display:table-row;">
-              <select class="form-control" style="margin-top:60px;">
-                <option>침대</option>
-                <option>의자</option>
-                <option>컴퓨터</option>
-                <option>서랍장</option>
-              </select>
-              <select class="form-control" style="margin-top:10px; margin-bottom:30px;">
-                <option>구로구</option>
-                <option>강남구</option>
-                <option>강서구</option>
-                <option>종로구</option>
-              </select>
-              <div style="color:#495057;">품목과 지역이 맞나요?<br>아래 버튼을 눌러<br>결과를 확인해 보세요.</div>
+        </div>
 
+        <div class="col" style="padding-left:0px;">
+          <div class="btn-group" style="display:table-row;">
+            <select id="item" class="form-control" style="margin-top:60px;">
+              <option>침대</option>
+              <option>의자</option>
+              <option>컴퓨터</option>
+              <option>서랍장</option>
+            </select>
+            <select id="loc" class="form-control" style="margin-top:10px; margin-bottom:30px;">
+              <option>구로구</option>
+              <option>강남구</option>
+              <option>강서구</option>
+              <option>종로구</option>
+            </select>
+            <div style="color:#495057;">품목과 지역이 맞나요?<br>아래 버튼을 눌러<br>결과를 확인해 보세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="text-align:center;">
+          <button id = "imageResult" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <b>분석결과</b>
+          </button>
+        </div>
+
+        <div class="collapse" id="collapseExample" style="padding-top:60px;">
+          <div class="container">
+            <div class="section-header">
+              <h3 id="image-output-title" style="font-size: 30px; color:#ffae33; font-weight:bold; padding-bottom:20px;"></h3>
+                <hr>
             </div>
             {% endblock %}
           </div>
@@ -206,30 +223,59 @@
                       </table>
                  </div>
               </div>
-              <div style="flex:0 0 33%; max-width: 33%;">
-                 <div class="results-table">
-                     <h3 style= "color: #ff887c; font-size:23px;">비용</h3>
-                       <table style="font-size: 11px">
-                        <thead>
-                          <tr>
-                            <th>품목</th><th>규격</th><th>부과금액(단위:원)</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>침대</td><td>2인용 세트</td><td>16,000</td>
-                          </tr>
-                          <tr>
-                            <td>침대</td><td>침대 헤드 2인용</td><td>3,000</td>
-                          </tr>
-                          <tr>
-                            <td>침대</td><td>2인용 매트리스</td><td>8,000</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                     <p style="font-size: 11px">*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능합니다.</p>
-                  </div>
+
+              <div id="bbb" style="flex:0 0 33%; max-width: 33%;">
+                <div class="results-table">
+                  <h3 style= "color: #ff887c; font-size:23px;">업체</h3>
+                  <!-- <table style="font-size: 11px">
+                    <thead>
+                      <tr>
+                        <th>지역</th><th>업체명</th><th>소재지</th><th>전화번호</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                      </tr>
+                      <tr>
+                        <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                      </tr>
+                      <tr>
+                        <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+                </div>
               </div>
+
+              <div id="kkk" style="flex:0 0 33%; max-width: 33%;">
+                <div class="results-table">
+                  <h3 style= "color: #ff887c; font-size:23px;">비용</h3>
+                  <!-- <table style="font-size: 11px">
+                    <thead>
+                      <tr>
+                        <th>품목</th><th>규격</th><th>부과금액(단위:원)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>침대</td><td>2인용 세트</td><td>16,000</td>
+                      </tr>
+                      <tr>
+                        <td>침대</td><td>침대 헤드 2인용</td><td>3,000</td>
+                      </tr>
+                      <tr>
+                        <td>침대</td><td>2인용 매트리스</td><td>8,000</td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+
+                 <p style="font-size: 11px">*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능합니다.</p>
+               </div>
+             </div>
+           </div>
+
+             <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
           </div>
            <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
         </div>
@@ -443,6 +489,75 @@
 
       }
     }
+  </script>
+
+  <script type="text/javascript">
+    $("#imageResult").click(function(){
+      item = $("#item option:selected").text();
+      loc = $("#loc option:selected").text();
+
+      input = {"item": item, "location": loc};
+
+      $.get("/output", input).done(function(data){
+        console.log(data);
+
+        $("#image-output-title").text('서울시 ' + loc + ' ' + item + '폐기 안내입니다.');
+
+        // 업체
+        th = '';
+
+        $.each(data.business.contents.header, function(index, value) {
+          th += '<th>' + value + '</th>';
+        });
+
+        tb = ''
+
+        $.each(data.business.contents.content, function(index, value) {
+          tb += '<tr>';
+
+          $.each(value, function(i, v) {
+            tb += '<td>' + v + '</td>';
+          });
+
+          tb += '</tr>';
+        });
+
+        content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
+
+        if ($("#bbb div h3 table").length){
+          $("#bbb div h3 table").remove();
+        }
+
+        $("#bbb div h3").append(content_body);
+
+        // 비용
+        th = '';
+
+        $.each(data.price.contents.header, function(index, value) {
+          th += '<th>' + value + '</th>';
+        });
+
+        tb = ''
+
+        $.each(data.price.contents.content, function(index, value) {
+          tb += '<tr>';
+
+          $.each(value, function(i, v) {
+            tb += '<td>' + v + '</td>';
+          });
+
+          tb += '</tr>';
+        });
+
+        content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
+
+        if ($("#kkk div h3 table").length){
+          $("#kkk div h3 table").remove();
+        }
+
+        $("#kkk div h3").append(content_body);
+      });
+    });
   </script>
 
 </body>
