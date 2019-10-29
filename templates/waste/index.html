@@ -139,24 +139,9 @@
             <img src="{% static 'img/add-image.png' %}" style="width:70px; margin-top:10px;"><div class="row" style="margin-top:40px; place-content:center;">Click here!</div>
               </div>
             </form>
-<!--modal-->
-        <a href="#dialog" role="button" class="btn btn-default" data-toggle="modal">Show Dialog</a>
-        <div class="modal fade" id="dialog" role="dialog" aria-labelledby="dlogLabel" aria-hidden="true" data-target="#exampleModalCenter">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body" style="height:100px;">
-                        의자가 맞나요?
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" role="button" class="btn btn-default" data-dismiss="modal">Yes</a>
-                        <a href="#" role="button" class="btn btn-default" data-dismiss="modal">No</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!--modal end-->
           </div>
           </div>
+
           <div class="col" style="padding-left:0px;">
             <div class="btn-group" style="display:table-row;">
               <select id="item" class="form-control" style="margin-top:60px;">
@@ -164,12 +149,39 @@
                 <option>의자</option>
                 <option>컴퓨터</option>
                 <option>서랍장</option>
+                <option>장롱</option>
+                <option>가스레인지</option>
+                <option>냉장고</option>
+                <option>책상</option>
+                <option>tv</option>
+                <option>소파</option>
               </select>
               <select id="loc" class="form-control" style="margin-top:10px; margin-bottom:30px;">
-                <option>구로구</option>
-                <option>강남구</option>
-                <option>강서구</option>
                 <option>종로구</option>
+                <option>중구</option>
+                <option>용산구</option>
+                <option>성동구</option>
+                <option>광진구</option>
+                <option>동대문구</option>
+                <option>중랑구</option>
+                <option>성북구</option>
+                <option>강북구</option>
+                <option>도봉구</option>
+                <option>노원구</option>
+                <option>은평구</option>
+                <option>서대문구</option>
+                <option>마포구</option>
+                <option>양천구</option>
+                <option>강서구</option>
+                <option>구로구</option>
+                <option>금천구</option>
+                <option>영등포구</option>
+                <option>동작구</option>
+                <option>관악구</option>
+                <option>서초구</option>
+                <option>강남구</option>
+                <option>송파구</option>
+                <option>강동구</option>
               </select>
               <div style="color:#495057;">품목과 지역이 맞나요?<br>아래 버튼을 눌러<br>결과를 확인해 보세요.</div>
 
@@ -256,6 +268,21 @@
       </div>
     <div class="row">
       <img src="{% static 'img/gg.png' %}" style="width:100%; margin-top:40px;">
+    </div>
+
+    <!--modal-->
+    <div class="modal fade" id="dialog" role="dialog" aria-labelledby="dlogLabel" aria-hidden="true" data-target="#exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body" style="height:100px;">
+                  <p></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id="item-yes" type="button" class="btn btn-success">YES</button>
+                </div>
+            </div>
+        </div>
     </div>
   </section><!-- #image -->
 
@@ -459,15 +486,19 @@
       acceptedFiles: "image/*",
       success: function(file, response) {
         console.log(file)
-        res=console.log(response)
         console.log(response)
 
-        $.each(data.data, function(index, value) {
-         ws +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td></tr>'
-        });
+        $('#dialog').modal('show');
+        $('.modal-body p').text('폐기할 품목이 ' + response.item + '인가요?');
 
+        $("#item-yes").click(function(){
+          $("#item").val(response.item);
+          $("#item").prop('disabled', true);
+          $('#dialog').modal('hide');
+        });
       }
     }
+
   </script>
 
   <script type="text/javascript">
@@ -477,7 +508,7 @@
         input = {"item": item, "location": loc};
         $.get("/output", input).done(function(data){
           console.log(data);
-          $("#image-output-title").text('서울시 ' + loc + ' ' + item + '폐기 안내입니다.');
+          $("#image-output-title").text('서울시 ' + loc + ' ' + item + ' 폐기 안내입니다.');
           // 업체
           th = '';
           $.each(data.business.contents.header, function(index, value) {
