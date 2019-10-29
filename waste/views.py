@@ -41,6 +41,47 @@ def post_image(request):
             return HttpResponse(json.dumps(data), content_type="application/json")
 
 
+def get_image_output(request):
+    if request.method == "GET":
+        item = request.GET.get('item')
+        location = request.GET.get('location')
+
+        print(item, location)
+
+        data = {'business': {}, 'price': {}}
+
+        location_id = City.objects.get(sigungu=location).cityid
+        print(location_id)
+
+        # 업체
+        NAME = '업체명'
+        TYPE = '처리분야'
+        DONG = '세부지역'
+        PHONE = '전화번호'
+        HEADER = [NAME, TYPE, DONG, PHONE]
+
+        data['business']['contents'] = {'header': HEADER, 'content': []}
+        # ORM 업체:
+        for business in Business.objects.filter(city_cityid=location_id):
+            row = [business.name, business.type, business.dong, business.phone]
+            data['business']['contents']['content'].append(row)
+
+        # 비용
+        CATEGORY = '카테고리'
+        ITEM = '물품'
+        SIZE = '규격'
+        PRICE = '비용'
+        HEADER = [CATEGORY, ITEM, SIZE, PRICE]
+
+        data['price']['contents'] = {'header': HEADER, 'content': []}
+        # ORM 폐기물:카테고리, 물품, 규격, 가격
+        for w in Waste.objects.filter(item__contains=item, city_cityid=location_id):
+            row = [w.category, w.item, w.size, w.price]
+            data['price']['contents']['content'].append(row)
+
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+
 def create_final_answer_data(intent):
     result = {}
 
