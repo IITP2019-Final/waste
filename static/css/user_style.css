@@ -10,6 +10,37 @@ a:focus {
   color: #343a40;
 }
 
+#header .logo img {
+    max-height:38px;
+    margin: 2px 0;
+    margin-left: 5px;
+}
+
+#team .member:hover .member-info {
+    background: #bed8579e;
+}
+
+#footer {
+    background: #95d8579e;
+}
+
+#footer .footer-top {
+    background: #95d8579e;
+}
+
+#footer .footer-top .footer-newsletter input[type="submit"] {
+    background: #95d8579e;
+}
+
+#footer .footer-top .footer-newsletter input[type="submit"]:hover {
+    background: #bed8579e;
+}
+
+.botui-container{
+    background-position: right bottom;
+    background-size: 140px;
+}
+
 .back-to-top {
   background: #ffa08a;
 }
@@ -21,6 +52,11 @@ a:focus {
 .btn-primary {
   background-color: #ffae33;
   border-color: #ffa518;
+}
+
+.btn-primary:hover {
+    background-color: #f5755b;
+    border-color: #ffa518;
 }
 
 .form-control {
@@ -70,10 +106,28 @@ a:focus {
 #chatbot {
   padding: 60px 0 40px 0;
   box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
-  height: 910px;
+  height: 1010px;
+}
+
+.botui-container{
+    height: 780px;
 }
 
 #image {
   padding: 60px 0;
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+}
+
+.profil>img.agent {
+    content: url("../img/cactus.png");
+    border-radius: 50%;
+    width:40px;
+    height:40px;
+}
+
+.profil>img.human{
+    content: url("../img/avatar.png");
+    border-radius: 50%;
+    width:40px;
+    height:40px;
 }
