@@ -125,7 +125,7 @@
   ============================-->
   <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
   <section id="image" class="section-bg"style="padding-bottom:0px; padding-top:80px;">
-    <div class="container" style="height:580px; text-align-last: center; margin-bottom:50px;">
+    <div class="container" style="height:580px; text-align-last: center; margin-bottom:50px;padding-top:30px;">
       <header class="section-header">
         <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:50px; color:#689a64;">이미지 검색</h3>
       </header>
@@ -136,58 +136,71 @@
             <form id='imageUploadForm' class="dropzone needsclick dz-clickable" action="/images" method="post", enctype="multipart/form-data" style="width: 362px; height:310px; justify-self:right; margin-right:50px;">
               {% csrf_token %}
               <div class="dz-message needsclick">
-                <img src="{% static 'img/add-image.png' %}" style="width:70px; margin-top:10px;"><div class="row" style="margin-top:40px; place-content:center;">Click here!</div>
+            <img src="{% static 'img/add-image.png' %}" style="width:70px; margin-top:10px;"><div class="row" style="margin-top:40px; place-content:center;">Click here!</div>
               </div>
             </form>
+<!--modal-->
+        <a href="#dialog" role="button" class="btn btn-default" data-toggle="modal">Show Dialog</a>
+        <div class="modal fade" id="dialog" role="dialog" aria-labelledby="dlogLabel" aria-hidden="true" data-target="#exampleModalCenter">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body" style="height:100px;">
+                        의자가 맞나요?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" role="button" class="btn btn-default" data-dismiss="modal">Yes</a>
+                        <a href="#" role="button" class="btn btn-default" data-dismiss="modal">No</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--modal end-->
+          </div>
+          </div>
+          <div class="col" style="padding-left:0px;">
+            <div class="btn-group" style="display:table-row;">
+              <select id="item" class="form-control" style="margin-top:60px;">
+                <option>침대</option>
+                <option>의자</option>
+                <option>컴퓨터</option>
+                <option>서랍장</option>
+              </select>
+              <select id="loc" class="form-control" style="margin-top:10px; margin-bottom:30px;">
+                <option>구로구</option>
+                <option>강남구</option>
+                <option>강서구</option>
+                <option>종로구</option>
+              </select>
+              <div style="color:#495057;">품목과 지역이 맞나요?<br>아래 버튼을 눌러<br>결과를 확인해 보세요.</div>
+
+            </div>
             {% endblock %}
           </div>
-        </div>
-
-        <div class="col" style="padding-left:0px;">
-          <div class="btn-group" style="display:table-row;">
-            <select id="item" class="form-control" style="margin-top:60px;">
-              <option>침대</option>
-              <option>의자</option>
-              <option>컴퓨터</option>
-              <option>서랍장</option>
-            </select>
-            <select id="loc" class="form-control" style="margin-top:10px; margin-bottom:30px;">
-              <option>구로구</option>
-              <option>강남구</option>
-              <option>강서구</option>
-              <option>종로구</option>
-            </select>
-            <div style="color:#495057;">품목과 지역이 맞나요?<br>아래 버튼을 눌러<br>결과를 확인해 보세요.</div>
-          </div>
-        </div>
       </div>
-
-      <div class="row">
-        <div style="text-align:center;">
-          <button id="imageResult" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <b>분석결과</b>
-          </button>
-        </div>
-
-        <div class="collapse" id="collapseExample" style="padding-top:60px;">
-          <div class="container">
-            <div class="section-header">
-              <h3 id="image-output-title" style="font-size: 30px; color:#ffae33; font-weight:bold; padding-bottom:20px;"></h3>
+      </div>
+      <div style="text-align:center;">
+      <button type="button" class="btn btn-secondary" disabled><b>분석결과</b></button>
+      <button id="imageResult" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <b>분석결과</b>
+      </button>
+      </div>
+      <div class="collapse" id="collapseExample" style="padding-top:60px;">
+        <div class="container">
+          <div class="section-header">
+            <h3 id="image-output-title" style="font-size: 30px; color:#ffae33; font-weight:bold; padding-bottom:20px;"></h3>
               <hr>
-            </div>
-
-            <div class="row">
-                    <div style="flex:0 0 33%; max-width: 33%;">
-                       <div class="results-table">
-                           <h3 style= "color: #ff887c; font-size:23px;">신청방법</h3>
-                              <p style="font-size:13px;">1. 동주민센터 : 관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기<br>
-                                  2. 구청 : 구청 홈페이지 접수 → 방문수거 신청<br>
-                                  3. 대형폐가전 : 원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수<br>
-                                  4. 재활용 : 재활용 가능 시 재활용센터에서 무상수거</p>
-                       </div>
-                    </div>
-
-                <div id="bbb" style="flex:0 0 33%; max-width: 33%;">
+          </div>
+          <div class="row">
+                  <div style="flex:0 0 33%; max-width: 33%;">
+                     <div class="results-table">
+                         <h3 style= "color: #ff887c; font-size:23px;">신청방법</h3>
+                            <p style="font-size:13px;">1. 동주민센터 : 관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기<br>
+                                2. 구청 : 구청 홈페이지 접수 → 방문수거 신청<br>
+                                3. 대형폐가전 : 원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수<br>
+                                4. 재활용 : 재활용 가능 시 재활용센터에서 무상수거</p>
+                     </div>
+                  </div>
+                 <div id="bbb" style="flex:0 0 33%; max-width: 33%;">
                   <div class="results-table">
                     <h3 style= "color: #ff887c; font-size:23px;">업체</h3>
                     <!-- <table style="font-size: 11px">
@@ -237,292 +250,273 @@
                  </div>
                </div>
              </div>
-
-               <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
-            </div>
-             <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
-          </div>
-          <div class="clear"></div>
+           <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
         </div>
-      <div class="row">
-        <img src="{% static 'img/gg.png' %}" style="width:100%; margin-top:40px;">
+        <div class="clear"></div>
       </div>
+    <div class="row">
+      <img src="{% static 'img/gg.png' %}" style="width:100%; margin-top:40px;">
     </div>
   </section><!-- #image -->
 
-    <!--==========================
-      Team Section
-    ============================-->
-    <section id="team">
+  <!--==========================
+    Team Section
+  ============================-->
+  <section id="team">
+    <div class="container">
+      <div class="section-header">
+        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:50px; color:#689a64;">Team</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-6 wow fadeInUp">
+          <div class="member">
+            <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+          <div class="member">
+            <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+          <div class="member">
+            <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="member">
+            <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- #team -->
+
+</main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top" style="background:#f9ffec;">
       <div class="container">
-        <div class="section-header">
-          <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:50px; color:#689a64;">Team</h3>
-        </div>
-
         <div class="row">
-          <div class="col-lg-3 col-md-6 wow fadeInUp">
-            <div class="member">
-              <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3 style="color:#95d8579e;">NewBiz</h3>
+            <p style="color:#212529;">Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
           </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="member">
-              <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4 style="color:#95d8579e;">Useful Links</h4>
+            <ul>
+              <li><a href="#" style="color:#212529;">Home</a></li>
+              <li><a href="#" style="color:#212529;">About us</a></li>
+              <li><a href="#" style="color:#212529;">Services</a></li>
+              <li><a href="#" style="color:#212529;">Terms of service</a></li>
+              <li><a href="#" style="color:#212529;">Privacy policy</a></li>
+            </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="member">
-              <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4 style="color:#95d8579e;">Contact Us</h4>
+            <p style="color:#212529;">
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter" style="background:#95d8579e;"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook" style="background:#95d8579e;"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram" style="background:#95d8579e;"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus" style="background:#95d8579e;"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin" style="background:#95d8579e;"><i class="fa fa-linkedin"></i></a>
             </div>
+
           </div>
 
-          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="member">
-              <img src="{% static 'img/team-4.jpg' %}" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4 style="color:#95d8579e;">Our Newsletter</h4>
+            <p style="color:#212529;">Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
           </div>
 
         </div>
-
       </div>
-    </section><!-- #team -->
+    </div>
 
-  </main>
-
-    <!--==========================
-      Footer
-    ============================-->
-    <footer id="footer">
-      <div class="footer-top" style="background:#f9ffec;">
-        <div class="container">
-          <div class="row">
-
-            <div class="col-lg-4 col-md-6 footer-info">
-              <h3 style="color:#95d8579e;">NewBiz</h3>
-              <p style="color:#212529;">Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
-            </div>
-
-            <div class="col-lg-2 col-md-6 footer-links">
-              <h4 style="color:#95d8579e;">Useful Links</h4>
-              <ul>
-                <li><a href="#" style="color:#212529;">Home</a></li>
-                <li><a href="#" style="color:#212529;">About us</a></li>
-                <li><a href="#" style="color:#212529;">Services</a></li>
-                <li><a href="#" style="color:#212529;">Terms of service</a></li>
-                <li><a href="#" style="color:#212529;">Privacy policy</a></li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <h4 style="color:#95d8579e;">Contact Us</h4>
-              <p style="color:#212529;">
-                A108 Adam Street <br>
-                New York, NY 535022<br>
-                United States <br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-
-              <div class="social-links">
-                <a href="#" class="twitter" style="background:#95d8579e;"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="facebook" style="background:#95d8579e;"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="instagram" style="background:#95d8579e;"><i class="fa fa-instagram"></i></a>
-                <a href="#" class="google-plus" style="background:#95d8579e;"><i class="fa fa-google-plus"></i></a>
-                <a href="#" class="linkedin" style="background:#95d8579e;"><i class="fa fa-linkedin"></i></a>
-              </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-newsletter">
-              <h4 style="color:#95d8579e;">Our Newsletter</h4>
-              <p style="color:#212529;">Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
-              <form action="" method="post">
-                <input type="email" name="email"><input type="submit"  value="Subscribe">
-              </form>
-            </div>
-
-          </div>
-        </div>
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
       </div>
-
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
-          -->
-        </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
+        -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
-    </footer><!-- #footer -->
+    </div>
+  </footer><!-- #footer -->
 
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <!-- Uncomment below i you want to use a preloader -->
-    <!-- <div id="preloader"></div> -->
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
 
-    <!-- JavaScript Libraries -->
-    <script src="{% static 'newbizlib/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'newbizlib/jquery/jquery-migrate.min.js' %}"></script>
-    <script src="{% static 'newbizlib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'newbizlib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'newbizlib/mobile-nav/mobile-nav.js' %}"></script>
-    <script src="{% static 'newbizlib/wow/wow.min.js' %}"></script>
-    <script src="{% static 'newbizlib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'newbizlib/counterup/counterup.min.js' %}"></script>
-    <script src="{% static 'newbizlib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'newbizlib/isotope/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'newbizlib/lightbox/js/lightbox.min.js' %}"></script>
-    <!-- Contact Form JavaScript File -->
-    <script src="{% static 'contactform/contactform.js' %}"></script>
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'newbizlib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'newbizlib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'newbizlib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'newbizlib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'newbizlib/mobile-nav/mobile-nav.js' %}"></script>
+  <script src="{% static 'newbizlib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'newbizlib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'newbizlib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'newbizlib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'newbizlib/isotope/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'newbizlib/lightbox/js/lightbox.min.js' %}"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="{% static 'contactform/contactform.js' %}"></script>
 
-    <!-- Template Main Javascript File -->
-    <script src="{% static 'js/main.js' %}"></script>
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %}"></script>
 
 
-    <!-- BotUI Javascript File -->
-    <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
-    <script src="{% static 'js/waste-bot.js' %}"></script>
+  <!-- BotUI Javascript File -->
+  <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/botui/build/botui.js"></script>
+  <script src="{% static 'js/waste-bot.js' %}"></script>
 
-    <!-- Dropzone Javascript File -->
-    <script src="{% static 'js/dropzone.js' %}"></script>
+  <!-- Dropzone Javascript File -->
+  <script src="{% static 'js/dropzone.js' %}"></script>
 
-    <script type="text/javascript">
-      Dropzone.options.imageUploadForm = {
-        paramName: "file",
-        maxFilesize: 5,
-        maxFiles: 1,
-        acceptedFiles: "image/*",
-        success: function(file, response) {
-          console.log(file)
-          res=console.log(response)
-          console.log(response)
+  <script type="text/javascript">
+    Dropzone.options.imageUploadForm = {
+      paramName: "file",
+      maxFilesize: 5,
+      maxFiles: 1,
+      acceptedFiles: "image/*",
+      success: function(file, response) {
+        console.log(file)
+        res=console.log(response)
+        console.log(response)
 
-          $.each(data.data, function(index, value) {
-           ws +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td></tr>'
-          });
+        $.each(data.data, function(index, value) {
+         ws +='<tr>' + '<td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td><td>' + value[3] + '</td></tr>'
+        });
 
-        }
       }
-    </script>
+    }
+  </script>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
       $("#imageResult").click(function(){
         item = $("#item option:selected").text();
         loc = $("#loc option:selected").text();
-
         input = {"item": item, "location": loc};
-
         $.get("/output", input).done(function(data){
           console.log(data);
-
           $("#image-output-title").text('서울시 ' + loc + ' ' + item + '폐기 안내입니다.');
-
           // 업체
           th = '';
-
           $.each(data.business.contents.header, function(index, value) {
             th += '<th>' + value + '</th>';
           });
-
           tb = ''
-
           $.each(data.business.contents.content, function(index, value) {
             tb += '<tr>';
-
             $.each(value, function(i, v) {
               tb += '<td>' + v + '</td>';
             });
-
             tb += '</tr>';
           });
-
           content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
-
           if ($("#bbb div h3 table").length){
             $("#bbb div h3 table").remove();
           }
-
           $("#bbb div h3").append(content_body);
-
           // 비용
           th = '';
-
           $.each(data.price.contents.header, function(index, value) {
             th += '<th>' + value + '</th>';
           });
-
           tb = ''
-
           $.each(data.price.contents.content, function(index, value) {
             tb += '<tr>';
-
             $.each(value, function(i, v) {
               tb += '<td>' + v + '</td>';
             });
-
             tb += '</tr>';
           });
-
           content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
-
           if ($("#kkk div h3 table").length){
             $("#kkk div h3 table").remove();
           }
-
           $("#kkk div h3").append(content_body);
         });
       });
     </script>
 
-  </body>
+</body>
 </html>

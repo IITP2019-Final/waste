@@ -17,7 +17,7 @@ a:focus {
 }
 
 #team .member:hover .member-info {
-    background: #bed8579e;
+    background: #ffcf55c2;
 }
 
 #footer {
@@ -57,6 +57,11 @@ a:focus {
 .btn-primary:hover {
     background-color: #f5755b;
     border-color: #ffa518;
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled {
+    background-color: #ffcf55;
+    border-color: #ffcf55;
 }
 
 .form-control {
@@ -118,16 +123,20 @@ a:focus {
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
-.profil>img.agent {
+.profile>img.agent {
     content: url("../img/cactus.png");
     border-radius: 50%;
     width:40px;
     height:40px;
 }
 
-.profil>img.human{
+.profile>img.human{
     content: url("../img/avatar.png");
     border-radius: 50%;
     width:40px;
     height:40px;
+}
+
+.modal-body {
+    position: absolute;
 }
