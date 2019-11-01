@@ -1,0 +1,200 @@
+﻿{
+  "intents": [
+    {
+      "intent": "help"
+    },
+    {
+      "intent": "price"
+    },
+    {
+      "intent": "business"
+    },
+    {
+      "intent": "how"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "item"
+    },
+    {
+      "entity": "location"
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "output": {
+        "text": {
+          "values": [
+            "안녕하세요? 챗봇 철이에요~ 폐기물 처리에 대해 알려드려요! 무엇이 궁금한가요?"
+          ]
+        }
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Fallback",
+      "output": {
+        "text": {
+          "values": [
+            "이해하지못했어요. 다시말해주실래요?.",
+            "다시 말해주실래요? 이해하지 못했어요.",
+            "무슨 의미인지 모르겠네요."
+          ]
+        }
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Fallback",
+      "previous_sibling": "Waste how"
+    },
+    {
+      "type": "frame",
+      "title": "Waste price",
+      "output": {},
+      "conditions": "#price",
+      "dialog_node": "Waste price",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "frame",
+      "title": "Waste business",
+      "output": {},
+      "conditions": "#business",
+      "dialog_node": "Waste business",
+      "previous_sibling": "Waste price"
+    },
+    {
+      "type": "frame",
+      "title": "Waste how",
+      "output": {},
+      "conditions": "#how",
+      "dialog_node": "Waste how",
+      "previous_sibling": "business"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_price_item",
+      "context": {
+        "item": "@item"
+      },
+      "conditions": "@item",
+      "event_name": "input",
+      "dialog_node": "handler_price_item_context",
+      "previous_sibling": "handler_price_item_text"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_price_location",
+      "context": {
+        "location": "@location"
+      },
+      "conditions": "@location",
+      "event_name": "input",
+      "dialog_node": "handler_price_location_context",
+      "previous_sibling": "handler_price_location_text"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_business_location",
+      "context": {
+        "location": "@location"
+      },
+      "conditions": "@location",
+      "event_name": "input",
+      "dialog_node": "handler_business_location_context",
+      "previous_sibling": "handler_business_location_text"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "무슨 품목을 폐기하실건가요?"
+      },
+      "parent": "slot_price_item",
+      "event_name": "focus",
+      "dialog_node": "handler_price_item_text"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "어디에 폐기하실건가요?"
+      },
+      "parent": "slot_price_location",
+      "event_name": "focus",
+      "dialog_node": "handler_price_location_text"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "어디 업체를 찾으세요?"
+      },
+      "parent": "slot_business_location",
+      "event_name": "focus",
+      "dialog_node": "handler_business_location_text"
+    },
+    {
+      "type": "slot",
+      "parent": "Waste price",
+      "variable": "$item",
+      "dialog_node": "slot_price_item",
+      "previous_sibling": null
+    },
+    {
+      "type": "slot",
+      "output": null,
+      "parent": "Waste price",
+      "variable": "$location",
+      "dialog_node": "slot_price_location",
+      "previous_sibling": "slot_price_item"
+    },
+    {
+      "type": "slot",
+      "output": null,
+      "parent": "Waste business",
+      "variable": "$location",
+      "dialog_node": "slot_business_location",
+      "previous_sibling": null
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "최종 비용입니다."
+          ]
+        }
+      },
+      "parent": "Waste price",
+      "dialog_node": "result_price",
+      "previous_sibling": "slot_price_location"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "최종 업체입니다."
+          ]
+        }
+      },
+      "parent": "Waste business",
+      "dialog_node": "result_business",
+      "previous_sibling": "slot_business_location"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "최종 방법입니다."
+          ]
+        }
+      },
+      "parent": "Waste how",
+      "dialog_node": "result_how",
+      "previous_sibling": null
+    }
+  ]
+}

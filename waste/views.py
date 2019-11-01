@@ -9,19 +9,33 @@ from waste.image_checker import image_pred
 import pathlib
 
 
+context_stack = [{'intents': [], 'entities': [], 'input': {}, 'output': {}, 'context': {}}]
+
+
 def post_chatbot(request):
     if request.method == "POST":
 
-        # Load pickle
-        with open("data/unique_intent.pickle", "rb") as fr:
-            unique_intent = pickle.load(fr)
+        # # Load pickle
+        # with open("data/unique_intent.pickle", "rb") as fr:
+        #     unique_intent = pickle.load(fr)
 
         # type = QueryDic
         user_text = request.POST.get('text[value]')
-        intent = get_final_output(predictions(user_text), unique_intent)
-        data = create_final_answer_data(intent['intent'])
 
-        return HttpResponse(json.dumps(data), content_type="application/json")
+        # user_input = {'input': {'text': user_text}, 'context': {'dialog_stack': []}}
+
+        user_input = {'input': {'text': user_text}}
+
+        if len(context_stack) > 0:
+            context = create_context(user_input, context_stack.pop())
+
+            context_stack.append(context)
+
+            data = context
+
+            return HttpResponse(json.dumps(data), content_type="application/json")
+
+        # data = create_final_answer_data(intent['intent'])
 
 
 def post_image(request):
@@ -39,6 +53,123 @@ def post_image(request):
             data = {'item': item}
 
             return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def create_context(user_input, context):
+    with open('data/waste_context.json', 'rb') as jf:
+        waste_context = json.load(jf)
+
+    if 'state' in context['context'] and context['context']['state'] == 'in_progress':  # 대화 진행중
+        result = context
+
+        for entity in [{'entity': 'item', 'value': '침대'}]:
+            result['entities'].append(entity)  # entity = {'entity': '', 'value': ''}
+
+        result['input']['text'] = user_input['input']['text']
+
+        event_handler = result['context']['dialog_stack']
+
+        parent_node = {}
+
+        # event_handler의 인텐트 부모 찾기 오류 event_handler가 없을 수 있다......
+        for i in waste_context['dialog_nodes']:
+            if i['dialog_node'] == event_handler[len(event_handler) - 1]['parent']:
+                slot = i
+                for k in waste_context['dialog_nodes']:
+                    if k['dialog_node'] == slot['parent']:
+                        parent_node = k
+
+        # if detector ok: #  개체가 찾아지면
+        # else detector not: #  개체를 못찾으면 Fallback 수행
+        if len(result['context']['dialog_stack']) > 0:  # 조건을 고쳐야함...
+            result['context']['dialog_stack'].pop()
+
+        if len(event_handler) > 0:  # 대화가 남음
+            result['output']['text'] = event_handler[len(event_handler) - 1]['output']['text']
+            result['context']['dialog_stack'] = event_handler
+            result['context']['state'] = 'in_progress'
+        else:  # 대화 끝, 조건 더 추가 필요! state, 문맥 데이터를 꺼내오는 것도 필요
+            for i in waste_context['dialog_nodes']:
+                if 'parent' in i and i['parent'] == parent_node['dialog_node'] and i['type'] == 'response_condition':
+                    print('result_node:', i)
+                    result['output']['text'] = i['output']['text']['values'][0]
+                    del result['context']['dialog_stack']
+                    del result['context']['state']
+
+    else:  # 초기 대화(Welcome)
+        result = {'intents': [], 'entities': [], 'input': {}, 'output': {}, 'context': {}}
+
+        # Load pickle
+        with open("data/unique_intent.pickle", "rb") as fr:
+            unique_intent = pickle.load(fr)
+
+        intent = get_final_output(predictions(user_input['input']['text']), unique_intent)
+
+        intent = intent  # {'intent': '', 'confidence': 0}
+
+        if intent['intent'] == '비용':
+            intent['intent'] = 'price'
+        elif intent['intent'] == '업체':
+            intent['intent'] = 'business'
+        elif intent['intent'] == '방법':
+            intent['intent'] = 'how'
+
+        result['intents'].append(intent)
+
+        # detector로 구현 필요~~
+        for entity in [{'entity': 'location', 'value': '구로구'}]:
+            result['entities'].append(entity)  # entity = {'entity': '', 'value': ''}
+
+        result['input']['text'] = user_input['input']['text']
+
+        parent_node = {}
+
+        # ?? 인텐트 dialog 찾기
+        for i in waste_context['dialog_nodes']:
+            if 'conditions' in i and i['conditions'] == '#' + intent['intent']:
+                parent_node = i
+
+        slot = []
+
+        # ?? 인텐트 dialog 자식 찾기
+        for i in waste_context['dialog_nodes']:
+            if 'parent' in i and i['parent'] == parent_node['dialog_node'] and i['type'] == 'slot':
+                slot.append(i)
+
+        # detector로 발견한 개체를 문맥에 저장
+        for i in result['entities']:
+            result['context'][i['entity']] = i['value']
+
+        event_handler = []
+
+        # 필요한 개체 슬롯과 현재 문맥에 저장된 개체를 비교해 남은 이벤트 저장
+        for i in slot:
+            if i['variable'][1:] not in result['context']:
+                for k in waste_context['dialog_nodes']:
+                    if 'parent' in k and k['parent'] == i['dialog_node'] and k['type'] == 'event_handler' and k['dialog_node'][-5:] == '_text':
+                        event_handler.append(k)
+
+        result['output']['text'] = []
+        result['context']['dialog_stack'] = []
+        result['context']['state'] = ''
+
+        if len(event_handler) > 0:  # 대화가 남음
+            result['output']['text'] = event_handler[len(event_handler) - 1]['output']['text']
+            result['context']['dialog_stack'] = event_handler
+            result['context']['state'] = 'in_progress'
+        else:  # 대화 끝, 조건 더 추가 필요! state, 문맥 데이터를 꺼내오는 것도 필요
+            for i in waste_context['dialog_nodes']:
+                if 'parent' in i and i['parent'] == parent_node['dialog_node'] and i['type'] == 'response_condition':
+                    print('result_node:', i)
+                    result['output']['text'] = i['output']['text']['values'][0]
+                    del result['context']['dialog_stack']
+                    del result['context']['state']
+
+        print("event_handler~", event_handler)
+
+        print("result~", result)
+
+    return result
 
 
 def get_image_output(request):

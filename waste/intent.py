@@ -119,6 +119,8 @@ def get_final_output(pred, classes):
             result['intent'] = classes[i]
             temp = prediction[i]
 
+            result['confidence'] = str(temp)
+
         print("%s has confidence = %s" % (classes[i], (prediction[i])))
 
     return result

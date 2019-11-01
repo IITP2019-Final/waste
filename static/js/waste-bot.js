@@ -65,77 +65,77 @@ var showReminderInput = function () {
       $.post('/chatbots', {'text': res}).done(function(data){
         console.log(data);
 
-        content = createContent(data);
+       /*content = createContent(data);
 
-        botui.message
-        .bot({
-          delay: 2000,
-          loading: true,
-          type: 'html',
-          content: content
-        });
+       botui.message
+       .bot({
+         delay: 2000,
+         loading: true,
+         type: 'html',
+         content: content
+       });
 
-        function createContent(data) {
-          const PRICE = '비용';
-          const HOW = '방법';
+       function createContent(data) {
+         const PRICE = '비용';
+         const HOW = '방법';
 
-          result = ''
+         result = ''
 
-          if (data.intent == HOW) {
-            result = '<div class="answer-table2"> 폐기물 <u>처리방법</u> 이에요!<br><br>' //+ res.value
-            + '<table>\n' +
-            '      <thead>\n' +
-            '        <tr>\n' +
-            '          <th>동주민센터</th><td>관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기할수있어요!</td>\n' +
-            '        </tr>\n' +
-            '      </thead>\n' +
-            '      <tbody>\n' +
-            '        <tr>\n' +
-            '          <th>구청</th><td>구청 홈페이지 접수 → 방문수거 신청할수있어요!</td>\n' +
-            '        </tr>\n' +
-            '        <tr>\n' +
-            '          <th>대형폐가전</th><td>원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수가 가능해요!</td>\n' +
-            '        </tr>\n' +
-            '        <tr>\n' +
-            '          <th>재활용</th><td>재활용 가능 시 재활용센터에서 무상수거 가능해요!</td>\n' +
-            '        </tr>\n' +
-            '      </tbody>\n' +
-            '    </table></div">'
-            + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div">';
-          } else {
-            cotent_start = '<div class="answer-table">폐기물 <u>처리' + data.intent + '</u> 에요!<br><br>';
+         if (data.intent == HOW) {
+           result = '<div class="answer-table2"> 폐기물 <u>처리방법</u> 이에요!<br><br>' //+ res.value
+           + '<table>\n' +
+           '      <thead>\n' +
+           '        <tr>\n' +
+           '          <th>동주민센터</th><td>관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기할수있어요!</td>\n' +
+           '        </tr>\n' +
+           '      </thead>\n' +
+           '      <tbody>\n' +
+           '        <tr>\n' +
+           '          <th>구청</th><td>구청 홈페이지 접수 → 방문수거 신청할수있어요!</td>\n' +
+           '        </tr>\n' +
+           '        <tr>\n' +
+           '          <th>대형폐가전</th><td>원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수가 가능해요!</td>\n' +
+           '        </tr>\n' +
+           '        <tr>\n' +
+           '          <th>재활용</th><td>재활용 가능 시 재활용센터에서 무상수거 가능해요!</td>\n' +
+           '        </tr>\n' +
+           '      </tbody>\n' +
+           '    </table></div">'
+           + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div">';
+         } else {
+           cotent_start = '<div class="answer-table">폐기물 <u>처리' + data.intent + '</u> 에요!<br><br>';
 
-            th = '';
+           th = '';
 
-            $.each(data.contents.header, function(index, value) {
-              th += '<th>' + value + '</th>';
-            });
+           $.each(data.contents.header, function(index, value) {
+             th += '<th>' + value + '</th>';
+           });
 
-            tb = ''
+           tb = ''
 
-            $.each(data.contents.content, function(index, value) {
-              tb += '<tr>';
+           $.each(data.contents.content, function(index, value) {
+             tb += '<tr>';
 
-              $.each(value, function(i, v) {
-                tb += '<td>' + v + '</td>';
-              });
+             $.each(value, function(i, v) {
+               tb += '<td>' + v + '</td>';
+             });
 
-              tb += '</tr>';
-            });
+             tb += '</tr>';
+           });
 
-            content_body = '<table border=1><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table></div>';
-            content_etc = '<div class="answer-table2">'
+           content_body = '<table border=1><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table></div>';
+           content_etc = '<div class="answer-table2">'
 
-            if (data.intent == PRICE) {
-              content_etc +=  '*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능해요!<br>'
-            }
+           if (data.intent == PRICE) {
+             content_etc +=  '*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능해요!<br>'
+           }
 
-            content_end = '궁금한 사항이 더 있으신가요?</div>';
-            result = cotent_start + content_body + content_etc + content_end;
-          }
+           content_end = '궁금한 사항이 더 있으신가요?</div>';
+           result = cotent_start + content_body + content_etc + content_end;
+         }
 
-          return result;
-        }
+         return result;
+       }*/
       });
 
       return botui.action.button({
