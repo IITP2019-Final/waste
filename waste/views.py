@@ -34,6 +34,11 @@ def post_chatbot(request):
 
             data = context
 
+            print(data['context'])
+
+            if 'state' not in data['context']:
+                data = create_final_answer_data(data)
+
             return HttpResponse(json.dumps(data), content_type="application/json")
 
         # data = create_final_answer_data(intent['intent'])
@@ -96,6 +101,10 @@ def create_context(user_input, context):
         # else detector not: #  개체를 못찾으면 Fallback 수행
         # if len(result['context']['dialog_stack']) > 0:  # 조건을 고쳐야함...
 
+        # detector로 발견한 개체를 문맥에 저장
+        for i in result['entities']:
+            result['context'][i['entity']] = i['value']
+
         if len(event_handler) > 0:  # 대화가 남음
             result['output']['text'] = event_handler[len(event_handler) - 1]['output']['text']
             result['context']['dialog_stack'] = event_handler
@@ -107,6 +116,10 @@ def create_context(user_input, context):
                     result['output']['text'] = i['output']['text']['values'][0]
                     del result['context']['dialog_stack']
                     del result['context']['state']
+
+        print("event_handler~", event_handler)
+
+        print("result~", result)
 
     else:  # 초기 대화(Welcome)
         result = {'intents': [], 'entities': [], 'input': {}, 'output': {}, 'context': {}}
@@ -130,7 +143,6 @@ def create_context(user_input, context):
 
         detector = proto_st_detector(user_input['input']['text'])
 
-        # detector로 구현 필요~~
         for entity in detector:
             result['entities'].append(entity)  # entity = {'entity': '', 'value': ''}
 
@@ -227,14 +239,53 @@ def get_image_output(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
-def create_final_answer_data(intent):
+# def create_final_answer_data(intent):
+#     result = {}
+#
+#     PRICE = '비용'
+#     BUSINESS = '업체'
+#     HOW = '방법'
+#
+#     if intent == PRICE:
+#         CATEGORY = '카테고리'
+#         ITEM = '물품'
+#         SIZE = '규격'
+#         HEADER = [CATEGORY, ITEM, SIZE, PRICE]
+#
+#         result['intent'] = PRICE
+#         result['contents'] = {'header': HEADER, 'content': []}
+#         # ORM 폐기물:카테고리, 물품, 규격, 가격
+#         for w in Waste.objects.filter(item__contains='침대', city_cityid=1):
+#             row = [w.category, w.item, w.size, w.price]
+#             result['contents']['content'].append(row)
+#     elif intent == BUSINESS:
+#         NAME = '업체명'
+#         TYPE = '처리분야'
+#         DONG = '세부지역'
+#         PHONE = '전화번호'
+#         HEADER = [NAME, TYPE, DONG, PHONE]
+#
+#         result['intent'] = BUSINESS
+#         result['contents'] = {'header': HEADER, 'content': []}
+#         # ORM 업체:
+#         for business in Business.objects.filter(city_cityid=(10, 26), type__icontains='재활용'):
+#             row = [business.name, business.type, business.dong, business.phone]
+#             result['contents']['content'].append(row)
+#     elif intent == HOW:
+#         result['intent'] = HOW
+#
+#     print(result)
+#
+#     return result
+
+def create_final_answer_data(data):
     result = {}
 
-    PRICE = '비용'
-    BUSINESS = '업체'
-    HOW = '방법'
+    PRICE = 'price'
+    BUSINESS = 'business'
+    HOW = 'how'
 
-    if intent == PRICE:
+    if data['intents'][0]['intent'] == PRICE:
         CATEGORY = '카테고리'
         ITEM = '물품'
         SIZE = '규격'
@@ -242,11 +293,17 @@ def create_final_answer_data(intent):
 
         result['intent'] = PRICE
         result['contents'] = {'header': HEADER, 'content': []}
+
+        item = data['context']['item']
+        location_id = City.objects.get(sigungu=data['context']['location']).cityid
+
         # ORM 폐기물:카테고리, 물품, 규격, 가격
-        for w in Waste.objects.filter(item__contains='침대', city_cityid=1):
+        for w in Waste.objects.filter(item__contains=item, city_cityid=location_id):
             row = [w.category, w.item, w.size, w.price]
             result['contents']['content'].append(row)
-    elif intent == BUSINESS:
+
+        result['title'] = '서울시 ' + data['context']['location'] + ' ' + item + ' 폐기물 처리 비용입니다.'
+    elif data['intents'][0]['intent'] == BUSINESS:
         NAME = '업체명'
         TYPE = '처리분야'
         DONG = '세부지역'
@@ -255,12 +312,17 @@ def create_final_answer_data(intent):
 
         result['intent'] = BUSINESS
         result['contents'] = {'header': HEADER, 'content': []}
+
+        location_id = City.objects.get(sigungu=data['context']['location']).cityid
         # ORM 업체:
-        for business in Business.objects.filter(city_cityid=(10, 26), type__icontains='재활용'):
+        for business in Business.objects.filter(city_cityid=location_id):
             row = [business.name, business.type, business.dong, business.phone]
             result['contents']['content'].append(row)
-    elif intent == HOW:
+
+        result['title'] = '서울시 ' + data['context']['location'] + ' 폐기물 처리 업체입니다.'
+    elif data['intents'][0]['intent'] == HOW:
         result['intent'] = HOW
+        result['title'] = '폐기물 처리 방법입니다.'
 
     print(result)
 

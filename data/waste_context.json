@@ -166,6 +166,7 @@
           ]
         }
       },
+      "variable": ["$item", "$location"],
       "parent": "Waste price",
       "dialog_node": "result_price",
       "previous_sibling": "slot_price_location"
@@ -179,6 +180,7 @@
           ]
         }
       },
+      "variable": ["$location"],
       "parent": "Waste business",
       "dialog_node": "result_business",
       "previous_sibling": "slot_business_location"
@@ -192,6 +194,7 @@
           ]
         }
       },
+      "variable": [],
       "parent": "Waste how",
       "dialog_node": "result_how",
       "previous_sibling": null

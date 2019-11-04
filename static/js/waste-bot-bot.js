@@ -47,19 +47,90 @@ var showReminderInput = function () {
           }
       });
 
-/*      $(document).ready( function (data) {
-      $('#myTable').DataTable();
-      } );*/
       $.post('/chatbots', {'text': res}).done(function(data){
         console.log(data);
 
-        botui.message
-        .bot({
-         delay: 2000,
-         loading: true,
-         type: 'html',
-         content: data.output.text
-       });
+        if (data.hasOwnProperty('context')) {
+          botui.message
+          .bot({
+           delay: 2000,
+           loading: true,
+           type: 'html',
+           content: data.output.text
+         });
+       } else {
+         content = createContent(data);
+
+         botui.message
+         .bot({
+           delay: 2000,
+           loading: true,
+           type: 'html',
+           content: content
+         });
+
+         function createContent(data) {
+           const PRICE = 'price';
+           const HOW = 'how';
+
+           result = ''
+
+           if (data.intent == HOW) {
+             result = '<div class="answer-table2">' + data.title + '<br><br>' //+ res.value
+             + '<table>\n' +
+             '      <thead>\n' +
+             '        <tr>\n' +
+             '          <th>동주민센터</th><td>관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기할수있어요!</td>\n' +
+             '        </tr>\n' +
+             '      </thead>\n' +
+             '      <tbody>\n' +
+             '        <tr>\n' +
+             '          <th>구청</th><td>구청 홈페이지 접수 → 방문수거 신청할수있어요!</td>\n' +
+             '        </tr>\n' +
+             '        <tr>\n' +
+             '          <th>대형폐가전</th><td>원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수가 가능해요!</td>\n' +
+             '        </tr>\n' +
+             '        <tr>\n' +
+             '          <th>재활용</th><td>재활용 가능 시 재활용센터에서 무상수거 가능해요!</td>\n' +
+             '        </tr>\n' +
+             '      </tbody>\n' +
+             '    </table></div">'
+             + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div">';
+           } else {
+             cotent_start = '<div class="answer-table">' + data.title + '<br><br>';
+
+             th = '';
+
+             $.each(data.contents.header, function(index, value) {
+               th += '<th>' + value + '</th>';
+             });
+
+             tb = ''
+
+             $.each(data.contents.content, function(index, value) {
+               tb += '<tr>';
+
+               $.each(value, function(i, v) {
+                 tb += '<td>' + v + '</td>';
+               });
+
+               tb += '</tr>';
+             });
+
+             content_body = '<table border=1><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table></div>';
+             content_etc = '<div class="answer-table2">'
+
+             if (data.intent == PRICE) {
+               content_etc +=  '*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능해요!<br>'
+             }
+
+             content_end = '궁금한 사항이 더 있으신가요?</div>';
+             result = cotent_start + content_body + content_etc + content_end;
+           }
+
+           return result;
+         }
+       }
       });
     }).then(function (res) {
       showReminderInput();
