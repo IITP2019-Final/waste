@@ -6,6 +6,7 @@ import pickle
 from waste.intent import predictions, get_final_output
 from .forms import ImageUploadFileForm
 from waste.image_checker import image_pred
+from waste.pos_tagging import proto_st_detector
 import pathlib
 
 
@@ -62,7 +63,9 @@ def create_context(user_input, context):
     if 'state' in context['context'] and context['context']['state'] == 'in_progress':  # 대화 진행중
         result = context
 
-        for entity in [{'entity': 'item', 'value': '침대'}]:
+        detector = proto_st_detector(user_input['input']['text'])
+
+        for entity in detector:
             result['entities'].append(entity)  # entity = {'entity': '', 'value': ''}
 
         result['input']['text'] = user_input['input']['text']
@@ -80,9 +83,18 @@ def create_context(user_input, context):
                         parent_node = k
 
         # if detector ok: #  개체가 찾아지면
+        for d in detector:
+            for i in waste_context['dialog_nodes']:
+                if len(event_handler) > 0:
+                    if i['dialog_node'] == event_handler[len(event_handler) - 1]['parent']:
+                        if d['entity'] == i['variable'][1:]:
+                            result['context']['dialog_stack'].pop()
+
+        # if detector ok: #  개체가 찾아지면
+        # if len(detector) > 0:
+        #     result['context']['dialog_stack'].pop()
         # else detector not: #  개체를 못찾으면 Fallback 수행
-        if len(result['context']['dialog_stack']) > 0:  # 조건을 고쳐야함...
-            result['context']['dialog_stack'].pop()
+        # if len(result['context']['dialog_stack']) > 0:  # 조건을 고쳐야함...
 
         if len(event_handler) > 0:  # 대화가 남음
             result['output']['text'] = event_handler[len(event_handler) - 1]['output']['text']
@@ -116,8 +128,10 @@ def create_context(user_input, context):
 
         result['intents'].append(intent)
 
+        detector = proto_st_detector(user_input['input']['text'])
+
         # detector로 구현 필요~~
-        for entity in [{'entity': 'location', 'value': '구로구'}]:
+        for entity in detector:
             result['entities'].append(entity)  # entity = {'entity': '', 'value': ''}
 
         result['input']['text'] = user_input['input']['text']
