@@ -47,14 +47,10 @@ var showReminderInput = function () {
           }
       });
 
-      end = false;
-
       $.post('/chatbots', {'text': res}).done(function(data){
         console.log(data);
 
         if (data.hasOwnProperty('context')) {
-          end = true;
-
           botui.message.bot({
             photo: true,
             delay: 2000,
@@ -64,7 +60,6 @@ var showReminderInput = function () {
          });
        } else {
          content = createContent(data);
-
          botui.message.bot({
            photo: true,
            delay: 2000,
