@@ -126,7 +126,7 @@ var showReminderInput = function () {
            '        </tr>\n' +
            '      </tbody>\n' +
            '    </table></div">'
-           + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div">';
+           + '<div class="answer-table2">궁금한게 더 있으신가요?</div">';
          } else {
            cotent_start = '<div class="answer-table">폐기물 <u>처리' + data.intent + '</u> 에요!<br><br>';
 
@@ -155,7 +155,7 @@ var showReminderInput = function () {
              content_etc +=  '*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능해요!<br>'
            }
 
-           content_end = '궁금한 사항이 더 있으신가요?</div>';
+           content_end = '궁금한게 더 있으신가요?</div>';
            result = cotent_start + content_body + content_etc + content_end;
          }
 
