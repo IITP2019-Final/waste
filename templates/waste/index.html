@@ -9,7 +9,7 @@
 
   <!-- Favicons -->
   {% load static %}
-  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/logo2.png' %}" rel="icon">
   <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -57,14 +57,14 @@
       <div class="logo float-left">
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
-        <a href="#intro" class="scrollto"><img src="{% static 'img/logo.png' %}" style="width:100px;"></a>
+        <a href="#intro" class="scrollto"><img src="{% static 'img/logo.png' %}" style="width:90px;"></a>
       </div>
 
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <li class="active"><a href="#intro">Home</a></li>
-          <li><a href="#chatbot">Chatbot</a></li>
           <li><a href="#image">Image</a></li>
+          <li><a href="#chatbot">Chatbot</a></li>
           <li><a href="#team">Team</a></li>
         </ul>
       </nav><!-- .main-nav -->
@@ -103,31 +103,16 @@
 
   <main id="main">
 
-  <!--==========================
-    챗봇 QnA
-  ============================-->
-  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
-  <section id="chatbot" style="background-color:#f9ffec;">
-    <div class="container" style="max-width:1300px;">
-      <header class="section-header">
-        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:10px; color:#689a64;">챗봇 QnA</h3>
-      </header>
-      <div class="botui-app-container" id="waste-bot" style="width: 1200px; height:650px; margin-bottom: 30px;">
-          <!--<idv><img src="{% static 'img/cactus.png' %}" style="width: 50px;"></idv>-->
-          <div style="background-color:#d6e655; height: 30px;"></div>
-        <bot-ui></bot-ui>
-      </div>
-    </div>
-  </section><!-- #chatbot -->
 
   <!--==========================
     이미지 검색
   ============================-->
   <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
   <section id="image" class="section-bg"style="padding-bottom:0px; padding-top:80px;">
-    <div class="container" style="height:580px; text-align-last: center; margin-bottom:50px;padding-top:30px;">
+    <div class="container" style="height:550px; text-align-last: center; margin-bottom:25px;padding-top:30px;">
       <header class="section-header">
-        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:50px; color:#689a64;">이미지 검색</h3>
+        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; color:#689a64; margin-bottom:0px; line-height:70%;">이미지 객체 인식<br><small style="font-size:60%;">(Image Recognition)</small></h3>
+        <p style="font-family: 'Hi Melody', cursive; font-size:120%; margin-bottom:30px;padding-bottom:30px;">폐기물 이미지를 올려주시면 분석을 통해 </p>
       </header>
       <div class="row">
         <div class="col">
@@ -202,42 +187,11 @@
               <hr>
           </div>
           <div class="row">
-                  <div style="flex:0 0 33%; max-width: 33%;">
-                     <div class="results-table">
-                         <h3 style= "color: #ff887c; font-size:23px;">신청방법</h3>
-                            <p style="font-size:13px;">1. 동주민센터 : 관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기<br>
-                                2. 구청 : 구청 홈페이지 접수 → 방문수거 신청<br>
-                                3. 대형폐가전 : 원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수<br>
-                                4. 재활용 : 재활용 가능 시 재활용센터에서 무상수거</p>
-                     </div>
-                  </div>
-                 <div id="bbb" style="flex:0 0 33%; max-width: 33%;">
-                  <div class="results-table">
-                    <h3 style= "color: #ff887c; font-size:23px;">업체</h3>
-                    <!-- <table style="font-size: 11px">
-                      <thead>
-                        <tr>
-                          <th>지역</th><th>업체명</th><th>소재지</th><th>전화번호</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
-                        </tr>
-                        <tr>
-                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
-                        </tr>
-                        <tr>
-                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
-                        </tr>
-                      </tbody>
-                    </table> -->
-                  </div>
-                </div>
-
-                <div id="kkk" style="flex:0 0 33%; max-width: 33%;">
+            <div class="col-5">
+              <div id="kkk">
                   <div class="results-table">
                     <h3 style= "color: #ff887c; font-size:23px;">비용</h3>
+                    <div></div>
                     <!-- <table style="font-size: 11px">
                       <thead>
                         <tr>
@@ -260,7 +214,43 @@
                    <p style="font-size: 11px">*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능합니다.</p>
                  </div>
                </div>
-             </div>
+            </div>
+            <div class="col-4">
+              <div id="bbb">
+                  <div class="results-table">
+                    <h3 style= "color: #ff887c; font-size:23px;">업체</h3>
+                    <div></div>
+                    <!-- <table style="font-size: 11px">
+                      <thead>
+                        <tr>
+                          <th>지역</th><th>업체명</th><th>소재지</th><th>전화번호</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                        </tr>
+                        <tr>
+                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                        </tr>
+                        <tr>
+                          <td>구로구</td><td>세명실업</td><td>종로구17길30(신사동)</td><td>02-305-3311</td>
+                        </tr>
+                      </tbody>
+                    </table> -->
+                  </div>
+                </div>
+            </div>
+            <div class="col-3">
+              <div class="results-table">
+                 <h3 style= "color: #ff887c; font-size:23px;">신청방법</h3>
+                    <p style="font-size:13px;">1. 동주민센터 : 관할 동주민센터 직접방문 → 접수<br>→ 스티커 부착, 직접 폐기<br>
+                        <br>2. 구청 : 구청 홈페이지 접수<br>→ 방문수거 신청<br>
+                        <br>3. 대형폐가전 : 원형 보전 시 무상수거<br>→ 전체 또는 홈페이지 접수<br>
+                        <br>4. 재활용 : 재활용 가능 시<br>→ 재활용센터에서 무상수거</p>
+              </div>
+            </div>
+            </div>
            <!-- <p style="text-align:center;padding-bottom:30px; color:#4444446e; margin-top:20px;"><u>업체문의 바로가기</u></p> -->
         </div>
         <div class="clear"></div>
@@ -285,88 +275,24 @@
     </div>
   </section><!-- #image -->
 
-  <!--==========================
-    Team Section
+   <!--==========================
+    챗봇 QnA
   ============================-->
-  <section id="team">
-    <div class="container">
-      <div class="section-header">
-        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; margin-bottom:50px; color:#689a64;">Team</h3>
+  <!-- section id를 다른 것으로 했을 때 style.css가 안 되는 문제 -->
+  <section id="chatbot" style="background-color:#f9ffec;height: 950px;">
+    <div class="container" style="max-width:1300px;">
+      <header class="section-header">
+        <h3 style="font-family: 'Hi Melody', cursive; font-size: 60px; color:#689a64; margin-bottom:0px;">철이봇</h3>
+        <p style="font-family: 'Hi Melody', cursive; font-size:120%; padding-bottom:20px;">설명</p>
+      </header>
+      <div class="botui-app-container" id="waste-bot" style="width: 630px; height:650px; margin-bottom: 30px;">
+          <!--<idv><img src="{% static 'img/cactus.png' %}" style="width: 50px;"></idv>-->
+          <div style="background-color:#d6e655; height: 30px;"></div>
+        <bot-ui></bot-ui>
       </div>
-
-      <div class="row">
-        <div class="col-lg-3 col-md-6 wow fadeInUp">
-          <div class="member">
-            <img src="{% static 'img/person.png' %}" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>임홍휘</h4>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-          <div class="member">
-            <img src="{% static 'img/person.png' %}" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>홍한울</h4>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-          <div class="member">
-            <img src="{% static 'img/person.png' %}" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>국지훈</h4>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-          <div class="member">
-            <img src="{% static 'img/person.png' %}" class="img-fluid" alt="">
-            <div class="member-info">
-              <div class="member-info-content">
-                <h4>박유찬</h4>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
     </div>
-  </section><!-- #team -->
+  </section><!-- #chatbot -->
+
 
 </main>
   
@@ -376,7 +302,7 @@
   <footer id="footer">
 
 
-<div class="container">
+<div class="container" style="height:50px;">
       <div class="copyright">
         &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
       </div>
@@ -469,10 +395,10 @@
             tb += '</tr>';
           });
           content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
-          if ($("#bbb div h3 table").length){
-            $("#bbb div h3 table").remove();
+          if ($("#bbb div div table").length){
+            $("#bbb div div table").remove();
           }
-          $("#bbb div h3").append(content_body);
+          $("#bbb div div").append(content_body);
           // 비용
           th = '';
           $.each(data.price.contents.header, function(index, value) {
@@ -487,10 +413,10 @@
             tb += '</tr>';
           });
           content_body = '<table style="font-size: 11px"><thead>' + '<tr>' + th + '</tr>' + '</thead>' + '<tbody>' + tb + '</tbody></table>';
-          if ($("#kkk div h3 table").length){
-            $("#kkk div h3 table").remove();
+          if ($("#kkk div div table").length){
+            $("#kkk div div table").remove();
           }
-          $("#kkk div h3").append(content_body);
+          $("#kkk div div").append(content_body);
         });
       });
     </script>

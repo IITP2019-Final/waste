@@ -37,8 +37,9 @@ a:focus {
 }
 
 .botui-container{
+    background-image: url("../img/desert.png");
     background-position: right bottom;
-    background-size: 140px;
+    background-size: 700px;
 }
 
 .back-to-top {
@@ -115,7 +116,7 @@ a:focus {
 }
 
 .botui-container{
-    height: 780px;
+    height: 660px;
 }
 
 #image {
@@ -139,4 +140,40 @@ a:focus {
 
 .modal-body {
     position: absolute;
+}
+
+.botui-message-content {
+    background-color: #ecf9e2;
+    border: #91cb62;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.botui-message-content.loading {
+    background-color: #ecf9e2;
+    color: #91cb62;
+}
+
+.botui-message-content.human {
+    background-color: #eafafc;
+    border: #77c6e5;
+    border-width: 1px;
+    border-style: solid;
+    color: #313332;
+}
+
+.answer-table {
+    font-size: 80%;
+}
+
+a:focus {
+    color: #ffa84d;
+}
+
+#footer .credits a {
+  color: #fff;
+}
+
+#footer {
+    color: #fff;
 }

@@ -1195,7 +1195,7 @@ section #chatbot {
 #footer {
 /*  background: #00428a;*/
   padding: 0 0 30px 0;
-  color: #eee;
+/*  color: #eee;*/
   font-size: 14px;
 }
 
@@ -1328,7 +1328,7 @@ section #chatbot {
 }
 
 #footer .credits a {
-  color: #bfddfe;
+/*  color: #bfddfe;*/
 }
 
 #footer .credits a:hover {
@@ -1445,8 +1445,8 @@ section #chatbot {
 }
 
 .botui-message-content.human {
-    color: #f7f8f8;
-    background-color: #ffb307;
+/*    color: #f7f8f8;*/
+/*    background-color: #ffb307;*/
     font-size: 16px;
 }
 

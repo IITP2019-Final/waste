@@ -53,6 +53,7 @@ var showReminderInput = function () {
         if (data.hasOwnProperty('context')) {
           botui.message
           .bot({
+          photo: true,
            delay: 2000,
            loading: true,
            type: 'html',
@@ -63,6 +64,7 @@ var showReminderInput = function () {
 
          botui.message
          .bot({
+         photo: true,
            delay: 2000,
            loading: true,
            type: 'html',
