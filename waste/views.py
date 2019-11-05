@@ -319,10 +319,10 @@ def create_final_answer_data(data):
             row = [business.name, business.type, business.dong, business.phone]
             result['contents']['content'].append(row)
 
-        result['title'] = '서울시 ' + data['context']['location'] + ' 처리 업체에요!'
+        result['title'] = '서울시 ' + data['context']['location'] + ' 처리 업체에요.'
     elif data['intents'][0]['intent'] == HOW:
         result['intent'] = HOW
-        result['title'] = '폐기물 처리 방법이에요!'
+        result['title'] = '대형생활폐기물 처리 방법이에요.'
 
     print(result)
 
