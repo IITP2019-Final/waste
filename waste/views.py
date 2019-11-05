@@ -302,7 +302,7 @@ def create_final_answer_data(data):
             row = [w.category, w.item, w.size, w.price]
             result['contents']['content'].append(row)
 
-        result['title'] = '서울시 ' + data['context']['location'] + ' ' + item + ' 폐기물 처리 비용입니다.'
+        result['title'] = '서울시 ' + data['context']['location'] + ' ' + item + ' 처리 비용이에요.'
     elif data['intents'][0]['intent'] == BUSINESS:
         NAME = '업체명'
         TYPE = '처리분야'
@@ -319,10 +319,10 @@ def create_final_answer_data(data):
             row = [business.name, business.type, business.dong, business.phone]
             result['contents']['content'].append(row)
 
-        result['title'] = '서울시 ' + data['context']['location'] + ' 폐기물 처리 업체입니다.'
+        result['title'] = '서울시 ' + data['context']['location'] + ' 처리 업체에요.'
     elif data['intents'][0]['intent'] == HOW:
         result['intent'] = HOW
-        result['title'] = '폐기물 처리 방법입니다.'
+        result['title'] = '대형생활폐기물 처리 방법이에요.'
 
     print(result)
 

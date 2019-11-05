@@ -4,7 +4,7 @@ botui.message.bot({
   photo: true,
   loading: true,
   delay:500,
-  content: '안녕하세요? 챗봇 철이에요~ 폐기물처리에 대해 알려드려요!'
+  content: '안녕하세요? 챗봇 철이에요~ 대형생활폐기물 처리에 관한 비용, 업체, 방법에 대해 알려드려요!'
 }).then(function () {
   showReminderInput();
 });
@@ -51,20 +51,17 @@ var showReminderInput = function () {
         console.log(data);
 
         if (data.hasOwnProperty('context')) {
-          botui.message
-          .bot({
-          photo: true,
-           delay: 2000,
-           loading: true,
-           type: 'html',
-           content: data.output.text
+          botui.message.bot({
+            photo: true,
+            delay: 2000,
+            loading: true,
+            type: 'html',
+            content: data.output.text
          });
        } else {
          content = createContent(data);
-
-         botui.message
-         .bot({
-         photo: true,
+         botui.message.bot({
+           photo: true,
            delay: 2000,
            loading: true,
            type: 'html',
@@ -96,8 +93,7 @@ var showReminderInput = function () {
              '          <th>재활용</th><td>재활용 가능 시 재활용센터에서 무상수거 가능해요!</td>\n' +
              '        </tr>\n' +
              '      </tbody>\n' +
-             '    </table></div">'
-             + '<div class="answer-table2">궁금한 사항이 더 있으신가요?</div">';
+             '    </table></div">';
            } else {
              cotent_start = '<div class="answer-table">' + data.title + '<br><br>';
 
@@ -126,15 +122,24 @@ var showReminderInput = function () {
                content_etc +=  '*대형폐가전(원형보전) 또는 재활용 가능 시 : <b>무상수거</b> 가능해요!<br>'
              }
 
-             content_end = '궁금한 사항이 더 있으신가요?</div>';
+             content_end = '</div>';
              result = cotent_start + content_body + content_etc + content_end;
+
            }
 
            return result;
          }
+
+         botui.message.bot({
+           photo: true,
+           loading: true,
+           delay: 3000,
+           content: '궁금한 것이 더 있으신가요?'
+         });
        }
       });
     }).then(function (res) {
+      console.log(res)
       showReminderInput();
     })
   }
